@@ -12,13 +12,9 @@ firebase_admin.initialize_app(cred, {
 })
 
 JongHap_real_time_track = db.reference('Restaurant_DB/Real_time/JongHap/')
-JongHap_R_snapshot = JongHap_real_time_track.get()
 Olive_real_time_track = db.reference('Restaurant_DB/Real_time/Olive/')
-Olive_R_snapshot = Olive_real_time_track.get()
 Sanyung_real_time_track = db.reference('Restaurant_DB/Real_time/Sanyung/')
-Sanyung_R_snapshot = Sanyung_real_time_track.get()
 TIP_real_time_track = db.reference('Restaurant_DB/Real_time/TIP/')
-TIP_R_snapshot = TIP_real_time_track.get()
 v = []
 
 # "제육볶음", "김치볶음밥", "일반주먹밥", "김치주먹밥", "참치주먹밥", "볼케이노치밥", "스팸마요덮밥", "라면", "오므라이스", "부대찌개", "뚝배기불고기", "돈까스"
@@ -170,6 +166,9 @@ hypos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13
 
 while True:
 
+    JongHap_R_snapshot = JongHap_real_time_track.get()
+
+
     di = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     PAST_finish_time = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # 이전 조리 완료 시간 ( ti-1 )
     count = 0
@@ -228,6 +227,7 @@ while True:
 
     ################################################################################################################################
 
+    Olive_R_snapshot = Olive_real_time_track.get()
 
     di = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     PAST_finish_time = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # 이전 조리 완료 시간 ( ti-1 )
@@ -287,6 +287,7 @@ while True:
 
     ################################################################################################################################
 
+    Sanyung_R_snapshot = Sanyung_real_time_track.get()
 
     di = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     PAST_finish_time = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # 이전 조리 완료 시간 ( ti-1 )
@@ -346,6 +347,7 @@ while True:
 
     ################################################################################################################################
 
+    TIP_R_snapshot = TIP_real_time_track.get()
 
     di = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     PAST_finish_time = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # 이전 조리 완료 시간 ( ti-1 )
