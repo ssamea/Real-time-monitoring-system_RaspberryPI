@@ -1,100 +1,200 @@
+import matplotlib
+
+matplotlib.use("TkAgg")
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+import tkinter.ttk
+import tkinter as tk
+from tkinter import ttk
+
 from matplotlib import pyplot as plt
 from matplotlib import animation
 import numpy as np
-import time
-import random
 from firebase import firebase
 
 firebase = firebase.FirebaseApplication("https://graduate-work-462b3.firebaseio.com/", None)
 
 result = firebase.get('Distribution_DB/Kpu', None)
+LARGE_FONT = ("Verdana", 12)
+fig = plt.figure()  # figure(도표) 생성
 
-fig = plt.figure(figsize=(7,7)) #figure(도표) 생성
+ax = plt.subplot(221, xlim=(0, 10), ylim=(0, 15))
+ax1 = plt.subplot(222, xlim=(0, 10), ylim=(0, 15))
+ax2 = plt.subplot(223, xlim=(0, 10), ylim=(0, 15))
+ax3 = plt.subplot(224, xlim=(0, 10), ylim=(0, 15))
 
-ax = plt.subplot(221, xlim=(0, 20), ylim=(0, 10))
-ax1 = plt.subplot(222, xlim=(0, 20), ylim=(0, 10))
-ax2 = plt.subplot(223, xlim=(0, 20), ylim=(0, 10))
-ax3 = plt.subplot(224, xlim=(0, 20), ylim=(0, 10))
+
 
 ax.set_title('TIP')
 ax1.set_title('Olive')
-ax2.set_title('Sanyung')
-ax3.set_title('Edong')
+#ax2.set_title('Sanyung')
+#ax3.set_title('JongHap')
 
-ax.set_ylabel('the number of persons'); 
-ax1.set_ylabel('the number of persons'); 
-ax2.set_ylabel('the number of persons'); 
-ax3.set_ylabel('the number of persons');
+#ax.set_ylabel('TIP');
+#ax1.set_ylabel('Olive');
+ax2.set_xlabel('Sanyung');
+ax3.set_xlabel('JongHap');
 
 max_points = 10
 max1_points = 10
 max2_points = 10
 max3_points = 10
 
-line, = ax.plot([], [], lw=1, c='blue', marker='d',ms=2)
-line1, = ax1.plot([], [], lw=1, c='red', marker='d',ms=2)
-line2, = ax2.plot([], [], lw=1, c='green', marker='d',ms=2)
-line3, = ax3.plot([], [], lw=1, c='yellow', marker='d',ms=2)
+line, = ax.plot([], [], lw=1, c='blue', marker='d', ms=2)
+line1, = ax1.plot([], [], lw=1, c='red', marker='d', ms=2)
+line2, = ax2.plot([], [], lw=1, c='green', marker='d', ms=2)
+line3, = ax3.plot([], [], lw=1, c='yellow', marker='d', ms=2)
 
-line, = ax.plot(np.arange(max_points), 
-                np.ones(max_points, dtype=np.float)*np.nan, lw=1, c='blue',ms=1)
-line1, = ax1.plot(np.arange(max1_points), 
-                np.ones(max1_points, dtype=np.float)*np.nan, lw=1, c='red',ms=1)
-line2, = ax2.plot(np.arange(max2_points), 
-                np.ones(max2_points, dtype=np.float)*np.nan, lw=1, c='green',ms=1)
-line3, = ax3.plot(np.arange(max3_points), 
-                np.ones(max3_points, dtype=np.float)*np.nan, lw=1, c='yellow',ms=1)
+line, = ax.plot(np.arange(max_points),
+                np.ones(max_points, dtype=np.float) * np.nan, lw=1, c='blue', ms=1)
+line1, = ax1.plot(np.arange(max1_points),
+                  np.ones(max1_points, dtype=np.float) * np.nan, lw=1, c='red', ms=1)
+line2, = ax2.plot(np.arange(max2_points),
+                  np.ones(max2_points, dtype=np.float) * np.nan, lw=1, c='green', ms=1)
+line3, = ax3.plot(np.arange(max3_points),
+                  np.ones(max3_points, dtype=np.float) * np.nan, lw=1, c='yellow', ms=1)
+
+lines=[line,line1,line2,line3]
 
 def init():
-	return line
-def init1():
-	return line1
-def init2():
-	return line2
-def init3():
-	return line3
+    return lines
 
 def animate(i):
-	y = firebase.get('Distribution_DB/Kpu/people_number', None)
-	old_y = line.get_ydata()
-	new_y = np.r_[old_y[1:], y]
-	line.set_ydata(new_y)
+    y = firebase.get('Distribution_DB/Tip/people_number', None)
+    old_y = line.get_ydata()
+    new_y = np.r_[old_y[1:], y]
+    line.set_ydata(new_y)
 
-	return line
-def animate1(i):
-	y1 = firebase.get('Distribution_DB/Olive/people_number', None)
-	#y1 = random.randint(0,10)
-	old_y1 = line1.get_ydata()
-	new_y1 = np.r_[old_y1[1:], y1]
-	line1.set_ydata(new_y1)
+    y1 = firebase.get('Distribution_DB/Olive/people_number', None)
+    old_y1 = line1.get_ydata()
+    new_y1 = np.r_[old_y1[1:], y1]
+    line1.set_ydata(new_y1)
 
-	return line1
+    y2 = firebase.get('Distribution_DB/Sanyung/people_number', None)
+    old_y2 = line2.get_ydata()
+    new_y2 = np.r_[old_y2[1:], y2]
+    line2.set_ydata(new_y2)
 
-def animate2(i):
-	y2 = firebase.get('Distribution_DB/Sanyung/people_number', None)
-	#y2 = random.randint(0,10)
-	old_y2 = line2.get_ydata()
-	new_y2 = np.r_[old_y2[1:], y2]
-	line2.set_ydata(new_y2)
+    y3 = firebase.get('Distribution_DB/JongHap/people_number', None)
+    old_y3 = line3.get_ydata()
+    new_y3 = np.r_[old_y3[1:], y3]
+    line3.set_ydata(new_y3)
 
-	return line2
-	
-def animate3(i):
-	y3 = firebase.get('Distribution_DB/Edong/people_number', None)
-	#y3 = random.randint(0,10)
-	old_y3 = line3.get_ydata()
-	new_y3 = np.r_[old_y3[1:], y3]
-	line3.set_ydata(new_y3)
+    return lines
 
-	return line3
+class Realtime(tk.Tk):
 
-anim = animation.FuncAnimation(fig, animate , init_func= init ,frames=50,interval=200, blit=False)
-anim1 = animation.FuncAnimation(fig, animate1 , init_func= init2 ,frames=50,interval=200, blit=False)
-anim2 = animation.FuncAnimation(fig, animate2 , init_func= init2 ,frames=50,interval=200, blit=False)
-anim3 = animation.FuncAnimation(fig, animate3 , init_func= init3 ,frames=50,interval=200, blit=False)
+    def __init__(self, *args, **kwargs):
+        tk.Tk.__init__(self, *args, **kwargs)
+
+        tk.Tk.wm_title(self, "RealtTime")
+
+        container = tk.Frame(self)
+        container.pack(side="top", fill="both", expand=True)
+        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
+
+        self.frames = {}
+
+        for F in (StartPage, PageOne ,BTCe_Page):
+            frame = F(container, self)
+
+            self.frames[F] = frame
+
+            frame.grid(row=0, column=0, sticky="nsew")
+
+        self.show_frame(StartPage)
+
+    def show_frame(self, cont):
+        frame = self.frames[cont]
+        frame.tkraise()
 
 
-plt.tight_layout()
-plt.show()
+class StartPage(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text=("Realtime"), font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+
+        button1 = ttk.Button(self, text="Distribution",
+                             command=lambda: controller.show_frame(BTCe_Page))
+        button1.pack()
+
+        button2 = ttk.Button(self, text="Waiting Time",
+                             command=lambda :controller.show_frame(PageOne))
+        button2.pack()
 
 
+class PageOne(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text="Waiting Time", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+
+        button1 = ttk.Button(self, text="Back to Home",
+                             command=lambda: controller.show_frame(StartPage))
+        button1.pack()
+
+        ref1 = firebase.get('Waiting_time_DB/Tip/Waiting_time', None)
+        ref2 = firebase.get('Waiting_time_DB/Olive/Waiting_time', None)
+        ref3 = firebase.get('Waiting_time_DB/Sanyung/Waiting_time', None)
+        ref4 = firebase.get('Waiting_time_DB/JongHap/Waiting_time', None)
+
+        # 표에 삽입될 데이터
+        self.treelist = [("TIP", ref1), ("Olive", ref2), ("Sanyung", ref3), ("JongHap", ref4)]
+
+        # ﻿표 생성하기. colums는 컬럼 이름, displaycolums는 실행될 때 보여지는 순서다.
+        self.treeview = tkinter.ttk.Treeview(self, columns=["one", "two"], displaycolumns=["one", "two"])
+        self.treeview.pack()
+
+        # 각 컬럼 설정. 컬럼 이름, 컬럼 넓이, 정렬 등
+        self.treeview.column("#0", width=100, )
+        self.treeview.heading("#0", text="Index")
+
+        self.treeview.column("#1", width=100, anchor="center")
+        self.treeview.heading("one", text="Restaurant", anchor="center")
+
+        self.treeview.column("#2", width=100, anchor="center")
+        self.treeview.heading("two", text="Time(분)", anchor="center")
+
+        for i in range(len(self.treelist)):
+            self.treeview.insert('', 'end', text=i + 1, values=self.treelist[i], iid=str(i))
+
+        button_del = ttk.Button(self, text = "Change", command = self.ChangeTable)
+        button_del.pack()
+
+    def ChangeTable(self):
+        print("값변동")
+        ref5 = firebase.get('Waiting_time_DB/Tip/Waiting_time', None)
+        ref6 = firebase.get('Waiting_time_DB/Olive/Waiting_time', None)
+        ref7 = firebase.get('Waiting_time_DB/Sanyung/Waiting_time', None)
+        ref8 = firebase.get('Waiting_time_DB/JongHap/Waiting_time', None)
+
+        treelist = [("TIP", ref5), ("Olive", ref6), ("Sanyung", ref7), ("JongHap", ref8)]
+        for i in range(len(treelist)):
+            self.treeview.item(str(i), values=treelist[i])
+
+class BTCe_Page(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text="Graph Page!", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+
+        button1 = ttk.Button(self, text="Back to Home",
+                             command=lambda: controller.show_frame(StartPage))
+        button1.pack()
+
+        canvas = FigureCanvasTkAgg(fig, self)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+
+        toolbar = NavigationToolbar2Tk(canvas, self)
+        toolbar.update()
+        canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+
+app = Realtime()
+anim = animation.FuncAnimation(fig, animate, init_func=init, frames=50, interval=200, blit=False)
+app.mainloop()
