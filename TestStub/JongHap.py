@@ -16,8 +16,8 @@ firebase_admin.initialize_app(cred, {
 })
 
 bucket= storage.bucket()
-blob=bucket.blob("food_img/JongHap/1.jpg")
-image=blob.download_as_string("1")
+#blob=bucket.blob("food_img/JongHap/1.jpg")
+#image=blob.download_as_string("1")
 
 name=[]
 price=[]
