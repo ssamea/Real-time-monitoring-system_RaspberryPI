@@ -324,6 +324,16 @@ def bayes_inner_fnc(res_name):
             cnt += int(end_hypo)
             print(end_hypo, max_num)
 
+            bayes_instance = Calculate()
+            if res_name == 'JongHap':
+                bayes_instance.mixes1[end_hypo]['p%d' % (count + 1)] += 1
+            elif res_name == 'Olive':
+                bayes_instance.mixes2[end_hypo]['p%d' % (count + 1)] += 1
+            elif res_name == 'Sanyung':
+                bayes_instance.mixes3[end_hypo]['p%d' % (count + 1)] += 1
+            elif res_name == 'TIP':
+                bayes_instance.mixes4[end_hypo]['p%d' % (count + 1)] += 1
+
             print('================================================')
 
         db.reference('Waiting_time_DB/%s/Waiting_time' % res_name).set(str(cnt))
