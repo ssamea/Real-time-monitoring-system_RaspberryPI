@@ -86,7 +86,7 @@ class Realtime(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
-        tk.Tk.wm_title(self, "RealtTime")
+        tk.Tk.wm_title(self, "Estimation System")
 
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
@@ -95,7 +95,7 @@ class Realtime(tk.Tk):
 
         self.frames = {}
 
-        for F in (StartPage, PageOne ,BTCe_Page):
+        for F in (StartPage, PageOne ,PageTwo, PageThree):
             frame = F(container, self)
 
             self.frames[F] = frame
@@ -113,78 +113,16 @@ class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text=("Realtime"), font=LARGE_FONT)
+        label = tk.Label(self, text=("Sanyung"), font=LARGE_FONT)
         label.pack(pady=10, padx=10)
 
-        button1 = ttk.Button(self, text="Distribution",
-                             command=lambda: controller.show_frame(BTCe_Page))
-        button1.pack()
+        button1 = ttk.Button(self, text="TIP",
+                             command=lambda: controller.show_frame(PageThree))
+        button1.pack(side='left')
 
-        button2 = ttk.Button(self, text="Waiting Time",
+        button2 = ttk.Button(self, text="JongHap",
                              command=lambda :controller.show_frame(PageOne))
-        button2.pack()
-
-
-class PageOne(tk.Frame):
-
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Waiting Time", font=LARGE_FONT)
-        label.pack(pady=10, padx=10)
-
-        button1 = ttk.Button(self, text="Back to Home",
-                             command=lambda: controller.show_frame(StartPage))
-        button1.pack()
-
-        ref1 = firebase.get('Waiting_time_DB/Tip/Waiting_time', None)
-        ref2 = firebase.get('Waiting_time_DB/Olive/Waiting_time', None)
-        ref3 = firebase.get('Waiting_time_DB/Sanyung/Waiting_time', None)
-        ref4 = firebase.get('Waiting_time_DB/JongHap/Waiting_time', None)
-
-        # 표에 삽입될 데이터
-        self.treelist = [("TIP", ref1), ("Olive", ref2), ("Sanyung", ref3), ("JongHap", ref4)]
-
-        # ﻿표 생성하기. colums는 컬럼 이름, displaycolums는 실행될 때 보여지는 순서다.
-        self.treeview = tkinter.ttk.Treeview(self, columns=["one", "two"], displaycolumns=["one", "two"])
-        self.treeview.pack()
-
-        # 각 컬럼 설정. 컬럼 이름, 컬럼 넓이, 정렬 등
-        self.treeview.column("#0", width=100, )
-        self.treeview.heading("#0", text="Index")
-
-        self.treeview.column("#1", width=100, anchor="center")
-        self.treeview.heading("one", text="Restaurant", anchor="center")
-
-        self.treeview.column("#2", width=100, anchor="center")
-        self.treeview.heading("two", text="Time(분)", anchor="center")
-
-        for i in range(len(self.treelist)):
-            self.treeview.insert('', 'end', text=i + 1, values=self.treelist[i], iid=str(i))
-
-        button_del = ttk.Button(self, text = "Change", command = self.ChangeTable)
-        button_del.pack()
-
-    def ChangeTable(self):
-        print("값변동")
-        ref5 = firebase.get('Waiting_time_DB/Tip/Waiting_time', None)
-        ref6 = firebase.get('Waiting_time_DB/Olive/Waiting_time', None)
-        ref7 = firebase.get('Waiting_time_DB/Sanyung/Waiting_time', None)
-        ref8 = firebase.get('Waiting_time_DB/JongHap/Waiting_time', None)
-
-        treelist = [("TIP", ref5), ("Olive", ref6), ("Sanyung", ref7), ("JongHap", ref8)]
-        for i in range(len(treelist)):
-            self.treeview.item(str(i), values=treelist[i])
-
-class BTCe_Page(tk.Frame):
-
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Graph Page!", font=LARGE_FONT)
-        label.pack(pady=10, padx=10)
-
-        button1 = ttk.Button(self, text="Back to Home",
-                             command=lambda: controller.show_frame(StartPage))
-        button1.pack()
+        button2.pack(side='right')
 
         canvas = FigureCanvasTkAgg(fig, self)
         canvas.draw()
@@ -194,6 +132,76 @@ class BTCe_Page(tk.Frame):
         toolbar.update()
         canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
+
+class PageOne(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text=("JongHap"), font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+
+        button1 = ttk.Button(self, text="Sanyung",
+                             command=lambda: controller.show_frame(StartPage))
+        button1.pack(side='left')
+
+        button2 = ttk.Button(self, text="Olive",
+                             command=lambda :controller.show_frame(PageTwo))
+        button2.pack(side='right')
+
+        canvas = FigureCanvasTkAgg(fig, self)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+
+        toolbar = NavigationToolbar2Tk(canvas, self)
+        toolbar.update()
+        canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+
+class PageTwo(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text=("Olive"), font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+
+        button1 = ttk.Button(self, text="JongHap",
+                             command=lambda: controller.show_frame(PageOne))
+        button1.pack(side='left')
+
+        button2 = ttk.Button(self, text="Tip",
+                             command=lambda: controller.show_frame(PageThree))
+        button2.pack(side='right')
+
+        canvas = FigureCanvasTkAgg(fig, self)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+
+        toolbar = NavigationToolbar2Tk(canvas, self)
+        toolbar.update()
+        canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+class PageThree(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text=("Tip"), font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+
+        button1 = ttk.Button(self, text="Olive",
+                             command=lambda: controller.show_frame(PageTwo))
+        button1.pack(side='left')
+
+        button2 = ttk.Button(self, text="Sanyung",
+                             command=lambda: controller.show_frame(StartPage))
+        button2.pack(side='right')
+
+        canvas = FigureCanvasTkAgg(fig, self)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+
+        toolbar = NavigationToolbar2Tk(canvas, self)
+        toolbar.update()
+        canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
 app = Realtime()
 anim = animation.FuncAnimation(fig, animate, init_func=init, frames=50, interval=200, blit=False)
