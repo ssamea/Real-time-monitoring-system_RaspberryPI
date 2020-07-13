@@ -303,8 +303,8 @@ def bayes_inner_fnc(res_name):
                 di[count] = pre_finish_time - PAST_finish_time[count]
                 if di[count] < 0:
                     di[count] = pre_finish_time - int(r_pay_time)
-                else:
-                    di[count] = pre_finish_time - int(r_pay_time)
+            else:
+                di[count] = pre_finish_time - int(r_pay_time)
 
             PAST_finish_time[count] = pre_finish_time
 
