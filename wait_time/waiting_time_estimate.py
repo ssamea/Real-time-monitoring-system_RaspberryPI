@@ -250,8 +250,6 @@ def bayes_inner_fnc(res_name):
     global sample_num
     global finish_time
 
-    finish_time = 0
-
     if res_name == 'JongHap':
         r_snapshot = JongHap_real_time_track.get()
     elif res_name == 'Olive':
@@ -324,22 +322,15 @@ def bayes_inner_fnc(res_name):
             cnt += int(end_hypo)
             print(end_hypo, max_num)
 
-            bayes_instance = Calculate()
-            if res_name == 'JongHap':
-                bayes_instance.mixes1[end_hypo]['p%d' % (count + 1)] += 1
-            elif res_name == 'Olive':
-                bayes_instance.mixes2[end_hypo]['p%d' % (count + 1)] += 1
-            elif res_name == 'Sanyung':
-                bayes_instance.mixes3[end_hypo]['p%d' % (count + 1)] += 1
-            elif res_name == 'TIP':
-                bayes_instance.mixes4[end_hypo]['p%d' % (count + 1)] += 1
-
             print('================================================')
 
         db.reference('Waiting_time_DB/%s/Waiting_time' % res_name).set(str(cnt))
 
 
 def delete_inner_fnc(res_name):
+    global count
+    global finish_time
+
     if res_name == 'JongHap':
         r_snapshot = JongHap_real_time_track.get()
     elif res_name == 'Olive':
@@ -361,9 +352,27 @@ def delete_inner_fnc(res_name):
                 db.reference('Restaurant_DB/Real_time/%s/%s' % (res_name, R_key)).delete()  # 결제 음식
                 once += 1
 
+                r_order_food = db.reference('Restaurant_DB/Real_time/%s/%s/order_food' % (res_name, R_key)).get()
+                bayes_instance = Calculate()
+
+                if res_name == 'JongHap':
+                    count = jonghap_list_insert_count(r_order_food)
+                    bayes_instance.mixes1[finish_time + random.randint(0, 5)]['p%d' % (count + 1)] += 1
+                elif res_name == 'Olive':
+                    count = olive_list_insert_count(r_order_food)
+                    bayes_instance.mixes2[finish_time + random.randint(0, 5)]['p%d' % (count + 1)] += 1
+                elif res_name == 'Sanyung':
+                    count = sanyung_list_insert_count(r_order_food)
+                    bayes_instance.mixes3[finish_time + random.randint(0, 5)]['p%d' % (count + 1)] += 1
+                elif res_name == 'TIP':
+                    count = tip_list_insert_count(r_order_food)
+                    bayes_instance.mixes4[finish_time + random.randint(0, 5)]['p%d' % (count + 1)] += 1
+
 
 def bayes_thrd(i_cond, i_turn):
     while True:
+        sleep(3)
+        
         i_cond.acquire()  # mutex_lock
 
         bayes_inner_fnc('JongHap')
@@ -375,8 +384,6 @@ def bayes_thrd(i_cond, i_turn):
 
         i_cond.notifyAll()  # notify to all consumers
         i_cond.release()  # mutex_unlock
-
-        sleep(3)
 
 
 def delete_order(i_cond, i_turn):
@@ -405,9 +412,9 @@ cond = threading.Condition()
 turn = CondVar()
 
 th1 = threading.Thread(target=bayes_thrd, args=(cond, turn))
-# th2 = threading.Thread(target=delete_order, args=(cond, turn))
+th2 = threading.Thread(target=delete_order, args=(cond, turn))
 th1.start()
-# th2.start()
+th2.start()
 
 
 # n = input()
