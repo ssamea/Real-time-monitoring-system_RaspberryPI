@@ -151,14 +151,14 @@ class Calculate(Suite):
         cal[6]: dict(p1=10, p2=10, p3=4, p4=4, p5=1, p6=6, p7=7, p8=15, p9=11, p10=13, p11=4, p12=5),
         cal[7]: dict(p1=12, p2=13, p3=4, p4=0, p5=2, p6=3, p7=7, p8=6, p9=5, p10=11, p11=8, p12=7),
         cal[8]: dict(p1=1, p2=4, p3=6, p4=7, p5=11, p6=16, p7=5, p8=5, p9=12, p10=10, p11=11, p12=1),
-        cal[9]: dict(p1=0, p2=0, p3=16, p4=5, p5=4, p6=13, p7=10, p8=12, p9=10, p10=14, p11=15, p12=12),
-        cal[10]: dict(p1=6, p2=7, p3=11, p4=14, p5=12, p6=11, p7=0, p8=15, p9=11, p10=7, p11=8, p12=5),
+        cal[9]: dict(p1=0, p2=0, p3=16, p4=5, p5=4, p6=12, p7=10, p8=11, p9=10, p10=14, p11=13, p12=12),
+        cal[10]: dict(p1=6, p2=7, p3=3, p4=1, p5=7, p6=2, p7=0, p8=5, p9=9, p10=7, p11=8, p12=5),
         cal[11]: dict(p1=2, p2=6, p3=6, p4=4, p5=4, p6=6, p7=6, p8=4, p9=1, p10=6, p11=5, p12=6),
         cal[12]: dict(p1=3, p2=7, p3=7, p4=8, p5=8, p6=9, p7=4, p8=1, p9=6, p10=4, p11=7, p12=4),
         cal[13]: dict(p1=4, p2=8, p3=6, p4=6, p5=6, p6=7, p7=8, p8=0, p9=7, p10=6, p11=5, p12=6),
-        cal[14]: dict(p1=5, p2=6, p3=9, p4=9, p5=4, p6=4, p7=3, p8=8, p9=5, p10=5, p11=4, p12=4),
+        cal[14]: dict(p1=5, p2=6, p3=4, p4=2, p5=4, p6=4, p7=3, p8=8, p9=5, p10=5, p11=4, p12=4),
         cal[15]: dict(p1=2, p2=3, p3=6, p4=6, p5=6, p6=2, p7=8, p8=0, p9=7, p10=6, p11=9, p12=6),
-        cal[16]: dict(p1=1, p2=2, p3=9, p4=9, p5=4, p6=4, p7=3, p8=8, p9=6, p10=5, p11=4, p12=1)
+        cal[16]: dict(p1=1, p2=2, p3=5, p4=1, p5=4, p6=4, p7=3, p8=8, p9=6, p10=5, p11=4, p12=1)
     }
 
     mixes2 = {
@@ -171,8 +171,8 @@ class Calculate(Suite):
         cal[6]: dict(p1=10, p2=10, p3=4, p4=4, p5=1, p6=6, p7=7, p8=15, p9=11, p10=13, p11=4, p12=5),
         cal[7]: dict(p1=12, p2=13, p3=4, p4=0, p5=2, p6=3, p7=7, p8=6, p9=5, p10=11, p11=8, p12=7),
         cal[8]: dict(p1=1, p2=4, p3=6, p4=7, p5=11, p6=16, p7=5, p8=5, p9=12, p10=10, p11=11, p12=1),
-        cal[9]: dict(p1=0, p2=0, p3=16, p4=5, p5=4, p6=13, p7=10, p8=12, p9=10, p10=14, p11=15, p12=12),
-        cal[10]: dict(p1=6, p2=7, p3=11, p4=14, p5=12, p6=11, p7=0, p8=15, p9=11, p10=7, p11=8, p12=5),
+        cal[9]: dict(p1=0, p2=0, p3=16, p4=5, p5=4, p6=12, p7=10, p8=11, p9=10, p10=14, p11=13, p12=12),
+        cal[10]: dict(p1=6, p2=7, p3=3, p4=1, p5=7, p6=2, p7=0, p8=5, p9=9, p10=7, p11=8, p12=5),
         cal[11]: dict(p1=2, p2=6, p3=6, p4=4, p5=4, p6=6, p7=6, p8=4, p9=1, p10=6, p11=5, p12=6),
         cal[12]: dict(p1=3, p2=7, p3=7, p4=8, p5=8, p6=9, p7=4, p8=1, p9=6, p10=4, p11=7, p12=4),
         cal[13]: dict(p1=4, p2=8, p3=6, p4=6, p5=6, p6=7, p7=8, p8=0, p9=7, p10=6, p11=5, p12=6),
@@ -191,8 +191,8 @@ class Calculate(Suite):
         cal[6]: dict(p1=10, p2=10, p3=4, p4=4, p5=1, p6=6, p7=7, p8=15, p9=11, p10=13, p11=4, p12=5),
         cal[7]: dict(p1=12, p2=13, p3=4, p4=0, p5=2, p6=3, p7=7, p8=6, p9=5, p10=11, p11=8, p12=7),
         cal[8]: dict(p1=1, p2=4, p3=6, p4=7, p5=11, p6=16, p7=5, p8=5, p9=12, p10=10, p11=11, p12=1),
-        cal[9]: dict(p1=0, p2=0, p3=16, p4=5, p5=4, p6=13, p7=10, p8=12, p9=10, p10=14, p11=15, p12=12),
-        cal[10]: dict(p1=6, p2=7, p3=11, p4=14, p5=12, p6=11, p7=0, p8=15, p9=11, p10=7, p11=8, p12=5),
+        cal[9]: dict(p1=0, p2=0, p3=16, p4=5, p5=4, p6=12, p7=10, p8=11, p9=10, p10=14, p11=13, p12=12),
+        cal[10]: dict(p1=6, p2=7, p3=3, p4=1, p5=7, p6=2, p7=0, p8=5, p9=9, p10=7, p11=8, p12=5),
         cal[11]: dict(p1=2, p2=6, p3=6, p4=4, p5=4, p6=6, p7=6, p8=4, p9=1, p10=6, p11=5, p12=6),
         cal[12]: dict(p1=3, p2=7, p3=7, p4=8, p5=8, p6=9, p7=4, p8=1, p9=6, p10=4, p11=7, p12=4),
         cal[13]: dict(p1=4, p2=8, p3=6, p4=6, p5=6, p6=7, p7=8, p8=0, p9=7, p10=6, p11=5, p12=6),
@@ -211,8 +211,8 @@ class Calculate(Suite):
         cal[6]: dict(p1=10, p2=10, p3=4, p4=4, p5=1, p6=6, p7=7, p8=15, p9=11, p10=13, p11=4, p12=5),
         cal[7]: dict(p1=12, p2=13, p3=4, p4=0, p5=2, p6=3, p7=7, p8=6, p9=5, p10=11, p11=8, p12=7),
         cal[8]: dict(p1=1, p2=4, p3=6, p4=7, p5=11, p6=16, p7=5, p8=5, p9=12, p10=10, p11=11, p12=1),
-        cal[9]: dict(p1=0, p2=0, p3=16, p4=5, p5=4, p6=13, p7=10, p8=12, p9=10, p10=14, p11=15, p12=12),
-        cal[10]: dict(p1=6, p2=7, p3=11, p4=14, p5=12, p6=11, p7=0, p8=15, p9=11, p10=7, p11=8, p12=5),
+        cal[9]: dict(p1=0, p2=0, p3=16, p4=5, p5=4, p6=12, p7=10, p8=11, p9=10, p10=14, p11=13, p12=12),
+        cal[10]: dict(p1=6, p2=7, p3=3, p4=1, p5=7, p6=2, p7=0, p8=5, p9=9, p10=7, p11=8, p12=5),
         cal[11]: dict(p1=2, p2=6, p3=6, p4=4, p5=4, p6=6, p7=6, p8=4, p9=1, p10=6, p11=5, p12=6),
         cal[12]: dict(p1=3, p2=7, p3=7, p4=8, p5=8, p6=9, p7=4, p8=1, p9=6, p10=4, p11=7, p12=4),
         cal[13]: dict(p1=4, p2=8, p3=6, p4=6, p5=6, p6=7, p7=8, p8=0, p9=7, p10=6, p11=5, p12=6),
@@ -296,6 +296,7 @@ def bayes_inner_fnc(res_name):
 
             # 결제 시간 ( pi )
             r_pay_time = db.reference('Restaurant_DB/Real_time/%s/%s/pay_time' % (res_name, R_key)).get()
+            finish_time = random.randint(3, 10)
             pre_finish_time = int(r_pay_time) + finish_time  # 현재 조리 완료 시간 ( ti )
             if PAST_finish_time[count] > int(r_pay_time):
                 di[count] = pre_finish_time - PAST_finish_time[count]
@@ -330,6 +331,7 @@ def bayes_inner_fnc(res_name):
 def delete_inner_fnc(res_name):
     global count
     global finish_time
+    global di
 
     if res_name == 'JongHap':
         r_snapshot = JongHap_real_time_track.get()
@@ -357,16 +359,16 @@ def delete_inner_fnc(res_name):
 
                 if res_name == 'JongHap':
                     count = jonghap_list_insert_count(r_order_food)
-                    bayes_instance.mixes1[finish_time + random.randint(0, 5)]['p%d' % (count + 1)] += 1
+                    bayes_instance.mixes1[di[count]]['p%d' % (count + 1)] += 1
                 elif res_name == 'Olive':
                     count = olive_list_insert_count(r_order_food)
-                    bayes_instance.mixes2[finish_time + random.randint(0, 5)]['p%d' % (count + 1)] += 1
+                    bayes_instance.mixes2[di[count]]['p%d' % (count + 1)] += 1
                 elif res_name == 'Sanyung':
                     count = sanyung_list_insert_count(r_order_food)
-                    bayes_instance.mixes3[finish_time + random.randint(0, 5)]['p%d' % (count + 1)] += 1
+                    bayes_instance.mixes3[di[count]]['p%d' % (count + 1)] += 1
                 elif res_name == 'TIP':
                     count = tip_list_insert_count(r_order_food)
-                    bayes_instance.mixes4[finish_time + random.randint(0, 5)]['p%d' % (count + 1)] += 1
+                    bayes_instance.mixes4[di[count]]['p%d' % (count + 1)] += 1
 
 
 def bayes_thrd(i_cond, i_turn):
@@ -415,9 +417,3 @@ th1 = threading.Thread(target=bayes_thrd, args=(cond, turn))
 th2 = threading.Thread(target=delete_order, args=(cond, turn))
 th1.start()
 th2.start()
-
-
-# n = input()
-# if n =='':
-#     print('프로그램 종료')
-#     break
