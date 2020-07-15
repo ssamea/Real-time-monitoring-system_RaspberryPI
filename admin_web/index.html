@@ -2,6 +2,7 @@
 <html>
 
 <style>
+
  .parent{
    width: 90%;
    margin: 10px auto;
@@ -373,9 +374,12 @@
             <h1 class="sub-header">대기시간</h1>
 
             <div class="table-responsive">
-              <table class="table table-striped"  id="waiting_table" style ="width:50%; box-sizing: border-box;">
+              <table class="table table-striped"  id="waiting_table" style ="width:50%; box-sizing: border-box; border: 1px solid #444444;">
                 <thead>
-
+                  <tr>
+                    <th>음식점</th>
+                    <th>대기시간</th>
+                  </tr>
                 </thead>
                 <tbody>
 
@@ -473,7 +477,7 @@
 
           <div class="Menu_JongHap_table" style = "display:none">
           <div class="table-responsive">
-            <table class="table table-striped"  id="Menu_JongHap_table" style ="width:50%; box-sizing: border-box;">
+            <table class="table table-striped"  id="Menu_JongHap_table" style ="width:50%; box-sizing: border-box; border: 1px solid #444444;">
               <thead>
 
               </thead>
@@ -487,7 +491,7 @@
 
           <div class="Menu_TIP_table" style = "display:none">
           <div class="table-responsive">
-            <table class="table table-striped"  id="Menu_TIP_table" style ="width:50%; box-sizing: border-box;">
+            <table class="table table-striped"  id="Menu_TIP_table" style ="width:50%; box-sizing: border-box; border: 1px solid #444444;">
               <thead>
 
               </thead>
@@ -501,7 +505,7 @@
 
           <div class="Menu_Sanyung_table" style = "display:none">
           <div class="table-responsive">
-            <table class="table table-striped"  id="Menu_Sanyung_table" style ="width:50%; box-sizing: border-box;">
+            <table class="table table-striped"  id="Menu_Sanyung_table" style ="width:50%; box-sizing: border-box; border: 1px solid #444444;">
               <thead>
 
               </thead>
@@ -515,7 +519,7 @@
 
           <div class="Menu_Olive_table" style = "display:none">
           <div class="table-responsive">
-            <table class="table table-striped"  id="Menu_Olive_table" style ="width:50%; box-sizing: border-box;">
+            <table class="table table-striped"  id="Menu_Olive_table" style ="width:50%; box-sizing: border-box; border: 1px solid #444444;">
               <thead>
 
               </thead>
@@ -546,85 +550,8 @@
         </div>
 
 
-        <div class = "monitor_table" style ="display:none">
-          <center><img id="myimg"></center>
-        </div>
-
-
-
-        <center>
-          <button class="Client_button" onclick = Client_load()  style = "display:none"><h1>Client</h1></button>
-          <button class="Distribution_button" onclick = Distribution_load()  style = "display:none"><h1>Distribution</h1></button>
-          <button class="Restaurant_button" onclick = Restaurant_load()  style = "display:none"><h1>Restaurant</h1></button>
-          <button class="Waiting_time_button" onclick = Waiting_time_load()  style = "display:none"><h1>Waiting_time</h1></button>
-        </center></br>
-
-        <center><textarea class="text_area" style="resize: none; display:none;" rows = "10" cols = "60" id = "result" readonly></textarea></center>
-
-        <div id="message" class="client_box" style = "display:none">
-          <text style = "float:left; margin-right:10px;"> ID </text>  <input type = "text" id = "Client_DB_ID" size= "12" style = "float:left;"> <br/><br/>
-          <text style = "float:left; margin-right:10px;"> PASSWORD </text> <input type = "text" id = "Client_DB_PASSWORD" size= "12" style = "float:left;"> <br/><br/>
-          <text style = "float:left; margin-right:10px;"> address </text> <input type = "text" id = "Client_DB_address" size= "12" style = "float:left;"> <br/><br/>
-          <text style = "float:left; margin-right:10px;"> e_mail </text> <input type = "text" id = "Client_DB_e_mail" size= "12" style = "float:left;"> <br/><br/>
-          <text style = "float:left; margin-right:10px;"> mobile </text> <input type = "text" id = "Client_DB_mobile" size= "12" style = "float:left;"> <br/><br/>
-          <text style = "float:left; margin-right:10px;"> name </text> <input type = "text" id = "Client_DB_name" size= "12" style = "float:left;"> <br/><br/>
-          <text style = "float:left; margin-right:10px;"> resident_number </text> <input type = "text" id = "Client_DB_resident_number" size= "12" style = "float:left;"> <br/><br/>
-          <br/>
-          <center><button onclick = client_insert()><h1>INSERT</h1></button></center>
-        </div>
-
-        <div id="message" class="distribution_box" style = "display:none">
-          <text style = "float:left; margin-right:10px;"> JongHap_people </text>
-          <input type = "text" id = "Distribution_DB_JongHap_people_number" size= "12" style = "float:left;"> <br/><br/>
-          <center><button onclick = distribution_JongHap_insert()><h1>INSERT</h1></button></center><br/>
-          <text style = "float:left; margin-right:10px;"> Olive_people </text>
-          <input type = "text" id = "Distribution_DB_Olive_people_number" size= "12" style = "float:left;"> <br/><br/>
-          <center><button onclick = distribution_Olive_insert()><h1>INSERT</h1></button></center><br/>
-          <text style = "float:left; margin-right:10px;"> Sanyung_people </text>
-          <input type = "text" id = "Distribution_DB_Sanyung_people_number" size= "12" style = "float:left;"> <br/><br/>
-          <center><button onclick = distribution_Sanyung_insert()><h1>INSERT</h1></button></center><br/>
-          <text style = "float:left; margin-right:10px;"> Tip_people </text>
-          <input type = "text" id = "Distribution_DB_Tip_people_number" size= "12" style = "float:left;"> <br/><br/>
-          <center><button onclick = distribution_Tip_insert()><h1>INSERT</h1></button></center><br/>
-        </div>
-
-        <div id="message" class="restaurant_box" style = "display:none">
-          <center><h2>Basic</h2></center>
-          <text style = "float:left; margin-right:10px;"> location </text>
-          <input type = "text" id = "Restaurant_DB_Basic_location" size= "12" style = "float:left;"> <br/><br/>
-          <text style = "float:left; margin-right:10px;"> menu </text>
-          <input type = "text" id = "Restaurant_DB_Basic_menu" size= "12" style = "float:left;"> <br/><br/>
-          <text style = "float:left; margin-right:10px;"> name </text>
-          <input type = "text" id = "Restaurant_DB_Basic_name" size= "12" style = "float:left;"> <br/><br/>
-          <text style = "float:left; margin-right:10px;"> price </text>
-          <input type = "text" id = "Restaurant_DB_Basic_price" size= "12" style = "float:left;"> <br/><br/>
-          <center><button onclick = restaurant_basic_insert()><h1>INSERT</h1></button></center><br/><br/>
-
-          <center><h2>Real_time</h2></center>
-          <text style = "float:left; margin-right:10px;"> order_food </text>
-          <input type = "text" id = "Restaurant_DB_Real_time_order_food" size= "12" style = "float:left;"> <br/><br/>
-          <text style = "float:left; margin-right:10px;"> pay_time </text>
-          <input type = "text" id = "Restaurant_DB_Real_time_pay_time" size= "12" style = "float:left;"> <br/><br/>
-          <text style = "float:left; margin-right:10px;"> price </text>
-          <input type = "text" id = "Restaurant_DB_Real_time_price" size= "12" style = "float:left;"> <br/><br/>
-          <text style = "float:left; margin-right:10px;"> restaurant_name </text>
-          <input type = "text" id = "Restaurant_DB_Real_time_restaurant_name" size= "12" style = "float:left;"> <br/><br/>
-          <center><button onclick = restaurant_real_time_insert()><h1>INSERT</h1></button></center>
-        </div>
-
-        <div id="message" class="waiting_time_box" style = "display:none">
-          <text style = "float:left; margin-right:10px;"> JongHap_waiting </text>
-          <input type = "text" id = "Wainting_time_DB_JongHap_waiting_time" size= "12" style = "float:left;"> <br/><br/>
-          <center><button onclick = waiting_time_JongHap_insert()><h1>INSERT</h1></button></center><br/>
-          <text style = "float:left; margin-right:10px;"> Olive_waiting </text>
-          <input type = "text" id = "Wainting_time_DB_Olive_waiting_time" size= "12" style = "float:left;"> <br/><br/>
-          <center><button onclick = waiting_time_Olive_insert()><h1>INSERT</h1></button></center><br/>
-          <text style = "float:left; margin-right:10px;"> Sanyung_waiting </text>
-          <input type = "text" id = "Wainting_time_DB_Sanyung_waiting_time" size= "12" style = "float:left;"> <br/><br/>
-          <center><button onclick = waiting_time_Sanyung_insert()><h1>INSERT</h1></button></center><br/>
-          <text style = "float:left; margin-right:10px;"> Tip_waiting </text>
-          <input type = "text" id = "Wainting_time_DB_Tip_waiting_time" size= "12" style = "float:left;"> <br/><br/>
-          <center><button onclick = waiting_time_Tip_insert()><h1>INSERT</h1></button></center><br/>
+        <div class = "monitor_table" style ="display:none; text-align:center;">
+          <img id="myimg">
         </div>
 
 
@@ -728,334 +655,6 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
-
-
-
-
-
-  function client_insert() {//////////////////////////////////////////////////////////////////////////////// insert
-    var database = firebase.database();
-    var Client_DB_ID = document.getElementById("Client_DB_ID").value;
-    var Client_DB_PASSWORD =  document.getElementById("Client_DB_PASSWORD").value;
-    var Client_DB_address = document.getElementById("Client_DB_address").value;
-    var Client_DB_e_mail = document.getElementById("Client_DB_e_mail").value;
-    var Client_DB_mobile = document.getElementById("Client_DB_mobile").value;
-    var Client_DB_name = document.getElementById("Client_DB_name").value;
-    var Client_DB_resident_number = document.getElementById("Client_DB_resident_number").value;
-
-
-    database.ref('Client_DB/Client/').push({
-      id: Client_DB_ID, password: Client_DB_PASSWORD,
-      address: Client_DB_address, e_mail: Client_DB_e_mail,
-      mobile: Client_DB_mobile, name: Client_DB_name, resident_number: Client_DB_resident_number
-    });
-
-    Client_load();
-  }
-
-  function distribution_JongHap_insert() {//////////////////////////////////////////////////////////////////////////////// insert
-    var database = firebase.database();
-    var Distribution_DB_JongHap_people_number = document.getElementById("Distribution_DB_JongHap_people_number").value;
-
-
-    database.ref('Distribution_DB/JongHap/').set({
-      people_number: Number(Distribution_DB_JongHap_people_number)
-    });
-
-    Distribution_load();
-  }
-
-  function distribution_Olive_insert() {//////////////////////////////////////////////////////////////////////////////// insert
-    var database = firebase.database();
-    var Distribution_DB_Olive_people_number = document.getElementById("Distribution_DB_Olive_people_number").value;
-
-
-    database.ref('Distribution_DB/Olive/').set({
-      people_number: Number(Distribution_DB_Olive_people_number)
-    });
-
-    Distribution_load();
-  }
-
-  function distribution_Sanyung_insert() {//////////////////////////////////////////////////////////////////////////////// insert
-    var database = firebase.database();
-    var Distribution_DB_Sanyung_people_number = document.getElementById("Distribution_DB_Sanyung_people_number").value;
-
-
-    database.ref('Distribution_DB/Sanyung/').set({
-      people_number: Number(Distribution_DB_Sanyung_people_number)
-    });
-
-    Distribution_load();
-  }
-
-  function distribution_Tip_insert() {//////////////////////////////////////////////////////////////////////////////// insert
-    var database = firebase.database();
-    var Distribution_DB_Tip_people_number = document.getElementById("Distribution_DB_Tip_people_number").value;
-
-
-    database.ref('Distribution_DB/Tip/').set({
-      people_number: Number(Distribution_DB_Tip_people_number)
-    });
-
-    Distribution_load();
-  }
-
-  function restaurant_basic_insert() {//////////////////////////////////////////////////////////////////////////////// insert
-    var database = firebase.database();
-    var Restaurant_DB_Basic_location = document.getElementById("Restaurant_DB_Basic_location").value;
-    var Restaurant_DB_Basic_menu = document.getElementById("Restaurant_DB_Basic_menu").value;
-    var Restaurant_DB_Basic_name = document.getElementById("Restaurant_DB_Basic_name").value;
-    var Restaurant_DB_Basic_price = document.getElementById("Restaurant_DB_Basic_price").value;
-
-    database.ref('Restaurant_DB/Basic/').push({
-      location: Restaurant_DB_Basic_location, menu: Restaurant_DB_Basic_menu,
-      name: Restaurant_DB_Basic_name, price: Number(Restaurant_DB_Basic_price)
-    });
-
-    Restaurant_load();
-  }
-
-  function restaurant_real_time_insert() {//////////////////////////////////////////////////////////////////////////////// insert
-    var database = firebase.database();
-    var Restaurant_DB_Real_time_order_food = document.getElementById("Restaurant_DB_Real_time_order_food").value;
-    var Restaurant_DB_Real_time_pay_time = document.getElementById("Restaurant_DB_Real_time_pay_time").value;
-    var Restaurant_DB_Real_time_price = document.getElementById("Restaurant_DB_Real_time_price").value;
-    var Restaurant_DB_Real_time_restaurant_name = document.getElementById("Restaurant_DB_Real_time_restaurant_name").value;
-
-    database.ref('Restaurant_DB/Real_time/').push({
-      order_food: Restaurant_DB_Real_time_order_food, pay_time: Restaurant_DB_Real_time_pay_time,
-      price: Restaurant_DB_Real_time_price, restaurant_name: Restaurant_DB_Real_time_restaurant_name
-    });
-
-    Restaurant_load();
-  }
-
-  function waiting_time_JongHap_insert() {//////////////////////////////////////////////////////////////////////////////// insert
-    var database = firebase.database();
-    var Wainting_time_DB_JongHap_waiting_time = document.getElementById("Wainting_time_DB_JongHap_waiting_time").value;
-
-
-    database.ref('Waiting_time_DB/JongHap/').set({
-      Waiting_time: Wainting_time_DB_JongHap_waiting_time
-    });
-
-    Waiting_time_load();
-  }
-
-  function waiting_time_Olive_insert() {//////////////////////////////////////////////////////////////////////////////// insert
-    var database = firebase.database();
-    var Wainting_time_DB_Olive_waiting_time = document.getElementById("Wainting_time_DB_Olive_waiting_time").value;
-
-
-    database.ref('Waiting_time_DB/Olive/').set({
-      Waiting_time: Wainting_time_DB_Olive_waiting_time
-    });
-
-    Waiting_time_load();
-  }
-
-  function waiting_time_Sanyung_insert() {//////////////////////////////////////////////////////////////////////////////// insert
-    var database = firebase.database();
-    var Wainting_time_DB_Sanyung_waiting_time = document.getElementById("Wainting_time_DB_Sanyung_waiting_time").value;
-
-
-    database.ref('Waiting_time_DB/Sanyung/').set({
-      Waiting_time: Wainting_time_DB_Sanyung_waiting_time
-    });
-
-    Waiting_time_load();
-  }
-
-  function waiting_time_Tip_insert() {//////////////////////////////////////////////////////////////////////////////// insert
-    var database = firebase.database();
-    var Wainting_time_DB_Tip_waiting_time = document.getElementById("Wainting_time_DB_Tip_waiting_time").value;
-
-
-    database.ref('Waiting_time_DB/Tip/').set({
-      Waiting_time: Wainting_time_DB_Tip_waiting_time
-    });
-
-    Waiting_time_load();
-  }
-
-
-  function Client_load() {//////////////////////////////////////////////////////////////////////////////// client load
-    var database = firebase.database();
-    var result = document.getElementById("result");
-    //var dataRef = database.ref("Client_DB_ID");
-    var client_box = document.getElementsByClassName("client_box")[0];
-    var distribution_box = document.getElementsByClassName("distribution_box")[0];
-    var waiting_time_box = document.getElementsByClassName("waiting_time_box")[0];
-    var restaurant_box = document.getElementsByClassName("restaurant_box")[0];
-
-    client_box.style.display = 'block';
-    distribution_box.style.display = 'none';
-    waiting_time_box.style.display = 'none';
-    restaurant_box.style.display = 'none';
-
-    firebase.database().ref('Client_DB/Client/').orderByKey().once('value', function(snapshot) {
-
-      //var rows = [];
-      snapshot.forEach(function(childSnapshot) {
-          var childKey = childSnapshot.key;
-          var childData = childSnapshot.val();
-
-           //rows.push(childKey);
-           //alert(childData.ID);
-           //result.value += 'Key: ' + childKey + '\n';
-           result.value += 'ID: ' + childData.id + '\n';
-           result.value += 'password: ' + childData.password + '\n';
-           result.value += 'address: ' + childData.address + '\n';
-           result.value += 'e_mail: ' + childData.e_mail + '\n';
-           result.value += 'mobile: ' + childData.mobile + '\n';
-           result.value += 'name: ' + childData.name + '\n';
-           result.value += 'resident_number: ' + childData.resident_number + '\n\n';
-       });
-
-    });
-    //return firebase.database().ref('Client_DB/Client/'+userid).once('value').then(function(snapshot) {
-    //var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-    //});
-    result.value = "";
-
-  }
-
-  function Distribution_load() {//////////////////////////////////////////////////////////////////////////////// distribution load
-    var database = firebase.database();
-    var result = document.getElementById("result");
-    var client_box = document.getElementsByClassName("client_box")[0];
-    var distribution_box = document.getElementsByClassName("distribution_box")[0];
-    var waiting_time_box = document.getElementsByClassName("waiting_time_box")[0];
-    var restaurant_box = document.getElementsByClassName("restaurant_box")[0];
-
-    client_box.style.display = 'none';
-    distribution_box.style.display = 'block';
-    waiting_time_box.style.display = 'none';
-    restaurant_box.style.display = 'none';
-
-
-    firebase.database().ref('Distribution_DB/').orderByKey().once('value', function(snapshot) {
-
-      //var rows = [];
-      snapshot.forEach(function(childSnapshot) {
-          var childKey = childSnapshot.key;
-          var childData = childSnapshot.val();
-
-           result.value += childKey + '_people_number: ' + childData.people_number + '\n';
-       });
-
-    });
-
-    result.value = "";
-  }
-
-  function Restaurant_load() {//////////////////////////////////////////////////////////////////////////////// restaurant load
-    var database = firebase.database();
-    var result = document.getElementById("result");
-    var client_box = document.getElementsByClassName("client_box")[0];
-    var distribution_box = document.getElementsByClassName("distribution_box")[0];
-    var waiting_time_box = document.getElementsByClassName("waiting_time_box")[0];
-    var restaurant_box = document.getElementsByClassName("restaurant_box")[0];
-
-    client_box.style.display = 'none';
-    distribution_box.style.display = 'none';
-    waiting_time_box.style.display = 'none';
-    restaurant_box.style.display = 'block';
-
-    firebase.database().ref('Restaurant_DB/Basic/').orderByKey().once('value', function(snapshot) {
-
-      result.value += '\n' + 'Basic' + '\n\n';
-      //var rows = [];
-      snapshot.forEach(function(childSnapshot) {
-          var childKey = childSnapshot.key;
-          var childData = childSnapshot.val();
-
-           result.value += 'location: ' + childData.location + '\n';
-           result.value += 'menu: ' + childData.menu + '\n';
-           result.value += 'name: ' + childData.name + '\n';
-           result.value += 'price: ' + childData.price + '\n\n';
-       });
-
-    });
-
-    firebase.database().ref('Restaurant_DB/Real_time/').orderByKey().once('value', function(snapshot) {
-
-      result.value += '\n' + 'Real_time' + '\n\n';
-      //var rows = [];
-      snapshot.forEach(function(childSnapshot) {
-          var childKey = childSnapshot.key;
-          var childData = childSnapshot.val();
-
-           result.value += 'order_food: ' + childData.order_food + '\n';
-           result.value += 'pay_time: ' + childData.pay_time + '\n';
-           result.value += 'price: ' + childData.price + '\n';
-           result.value += 'restaurant_name: ' + childData.restaurant_name + '\n\n';
-       });
-
-    });
-
-    result.value = "";
-  }
-
-  function Waiting_time_load() {//////////////////////////////////////////////////////////////////////////////// waiting time load
-    var database = firebase.database();
-    var result = document.getElementById("result");
-    var client_box = document.getElementsByClassName("client_box")[0];
-    var distribution_box = document.getElementsByClassName("distribution_box")[0];
-    var waiting_time_box = document.getElementsByClassName("waiting_time_box")[0];
-    var restaurant_box = document.getElementsByClassName("restaurant_box")[0];
-
-    client_box.style.display = 'none';
-    distribution_box.style.display = 'none';
-    waiting_time_box.style.display = 'block';
-    restaurant_box.style.display = 'none';
-
-    firebase.database().ref('Waiting_time_DB/').orderByKey().once('value', function(snapshot) {
-
-      //var rows = [];
-      snapshot.forEach(function(childSnapshot) {
-          var childKey = childSnapshot.key;
-          var childData = childSnapshot.val();
-
-           result.value += childKey + '_waiting_time: ' + childData.Waiting_time + '\n\n';
-       });
-
-    });
-
-    result.value = "";
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1324,6 +923,8 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
       menu_name: Menu_table_push_name, price: Menu_table_push_price
     });
 
+    See_JongHap_menu()
+
   }
 
   function Menu_table_delete() {
@@ -1344,6 +945,8 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
         }
       });
+
+      See_JongHap_menu()
 
     });
 
@@ -1439,7 +1042,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
         content += '<td>' + val.Waiting_time + '</td>';
         content += '</tr>';
       });
-      $('#waiting_table').html("<tbody><tr><th></th><th></th></tr></tbody>");
+      $('#waiting_table').html("<thead><tr><th>음식점</th><th>대기시간</th></tr></thead><tbody></tbody>");
       $('#waiting_table').append(content);
    });
   }
