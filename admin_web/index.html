@@ -84,8 +84,8 @@
  li.p-100{width:100%;animation:p-100 2s}
 
  li.p-0::before{content:"0"}
- li.p-5::before{content:"1명"}
- li.p-10::before{content:"2명"}
+ li.p-5::before{content:"1"}
+ li.p-10::before{content:"2"}
  li.p-15::before{content:"3명"}
  li.p-20::before{content:"4명"}
  li.p-25::before{content:"5명"}
@@ -346,9 +346,9 @@
 
         <div class = "waiting_graph" style = "display:none;">
 
-          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1  class="sub-header">현장인원분포</h1>
-            <div class="graph-wrapper">
+            <div class="graph-wrapper" style="width:600px; height:400px;">
               <div class="percent-indicator">
                 <div class="per-0"></div>
                 <div class="per-20"></div>
@@ -369,11 +369,11 @@
 
 
           <div class = "waiting_table">
-          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
             <h1 class="sub-header">대기시간</h1>
 
-            <div class="table-responsive">
+            <div class="table-responsive" style="width:500px; height:500px;">
               <table class="table table-striped"  id="waiting_table" style ="width:50%; box-sizing: border-box; border: 1px solid #444444;">
                 <thead>
                   <tr>
@@ -477,7 +477,7 @@
 
           <div class="Menu_JongHap_table" style = "display:none">
           <div class="table-responsive">
-            <table class="table table-striped"  id="Menu_JongHap_table" style ="width:50%; box-sizing: border-box; border: 1px solid #444444;">
+            <table class="table table-striped"  id="Menu_JongHap_table" style ="width:300px; box-sizing: border-box; border: 1px solid #444444;">
               <thead>
 
               </thead>
@@ -491,7 +491,7 @@
 
           <div class="Menu_TIP_table" style = "display:none">
           <div class="table-responsive">
-            <table class="table table-striped"  id="Menu_TIP_table" style ="width:50%; box-sizing: border-box; border: 1px solid #444444;">
+            <table class="table table-striped"  id="Menu_TIP_table" style ="width:300px; box-sizing: border-box; border: 1px solid #444444;">
               <thead>
 
               </thead>
@@ -505,7 +505,7 @@
 
           <div class="Menu_Sanyung_table" style = "display:none">
           <div class="table-responsive">
-            <table class="table table-striped"  id="Menu_Sanyung_table" style ="width:50%; box-sizing: border-box; border: 1px solid #444444;">
+            <table class="table table-striped"  id="Menu_Sanyung_table" style ="width:300px; box-sizing: border-box; border: 1px solid #444444;">
               <thead>
 
               </thead>
@@ -519,7 +519,7 @@
 
           <div class="Menu_Olive_table" style = "display:none">
           <div class="table-responsive">
-            <table class="table table-striped"  id="Menu_Olive_table" style ="width:50%; box-sizing: border-box; border: 1px solid #444444;">
+            <table class="table table-striped"  id="Menu_Olive_table" style ="width:300px; box-sizing: border-box; border: 1px solid #444444;">
               <thead>
 
               </thead>
@@ -539,15 +539,21 @@
               <option value="Olive">Olive</option>
             </select>
           </div></br></br>
+          <div style="width:210px; height:230px; float:left; border:1px solid gray; border-radius: 10px; margin:10px; padding:10px">
             <text style = "float:left; margin-right:10px;"> 메뉴 </text>
             <input type = "text" id = "Menu_table_push_name" size= "12" style = "float:left;"> <br/><br/>
             <text style = "float:left; margin-right:10px;"> 가격 </text>
             <input type = "text" id = "Menu_table_push_price" size= "12" style = "float:left;"> <br/><br/>
             <button onclick = Menu_table_push()>추가</button>
             <button onclick = Menu_table_delete()>삭제</button>
+          </div>
+          <div style="width:210px; height:230px; float:left; border:1px solid gray; border-radius: 10px; margin:10px; padding:10px">
+            <text style = "float:left; margin-right:10px;"> 이름 </text>
+            <input type = "text" id = "image_push_name" size= "12" style = "float:left;"> <br/><br/>
             <input type="file" id="input_image" accept="img/*" onchange="previewImage(this,'View_area')">
             <div id='View_area' style='position:relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'></div>
-            <button class="upload_btn" onclick="preview_image">이미지 업로드</button>
+            <button class="upload_btn" onclick="upload_image();">이미지 업로드</button>
+          </div>
 
         </div>
         </div>
@@ -1147,19 +1153,21 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
   }
 
   function upload_image() {
+    var restaurant = document.getElementById("restaurant");
+    var restaurant_value = restaurant.options[restaurant.selectedIndex].value;
+    var image_name = document.getElementById("image_push_name");
     var storage = firebase.storage().ref();
-    var file = document.getElementById("input_image").files;
+    var file = document.getElementById('input_image').files[0];
     var metadata = {
       contentType: 'image/jpg'
     };
 
-    var storageRef = storage.child('food_img/JongHap/' + file.name).put(file, metadata);
+    var storageRef = storage.child('food_img/' + restaurant_value + '/' + image_name.value + '.jpg').put(file, metadata);
 
+    alert('업로드 완료');
 
 
   }
-
-
 
 
 </script>
