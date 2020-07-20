@@ -3,6 +3,40 @@
 
 <style>
 
+.filebox label {
+  display: inline-block;
+  padding: .5em .75em;
+  color: #fff;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #0077cc;
+  cursor: pointer;
+  border: 1px solid #0055cc;
+  border-radius: .25em;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.filebox label:hover {
+  background-color: #006699;
+}
+
+.filebox label:active {
+  background-color: #006699;
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
  .parent{
    width: 90%;
    margin: 10px auto;
@@ -284,7 +318,7 @@
      <meta name="author" content="">
      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
      <link rel="icon" href="../../favicon.ico">
-	   <title>부트스트랩 101 템플릿</title>
+	   <title>관리자</title>
 
      <!-- update the version number as needed -->
     <script defer src="/__/firebase/7.7.0/firebase-app.js"></script>
@@ -319,12 +353,8 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-
-          </button>
           <a class="navbar-brand" href="#">Admin Page</a>
         </div>
-
       </div>
     </nav>
 
@@ -337,7 +367,6 @@
             <li><a href="#" onclick = "open_order_table();">주문 현황</a></li>
             <li><a href="https://console.firebase.google.com/project/graduate-work-462b3/authentication/users?hl=ko">회원 현황</a></li>
             <li><a href="#" onclick = "open_monitor_table();">영상 모니터링</a></li>
-            <center><img src="somi.jpg "></center>
           </ul>
         </div>
 
@@ -402,7 +431,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
           <h1 class="sub-header">주문 현황</h1>
-          <button onclick=order_menu_refresh()>새로고침</button>
+          <button type="button" class="btn btn-primary" onclick=order_menu_refresh()>새로고침</button>
           <div class="table-responsive">
             <div class="parent">
               <div class="first">
@@ -469,13 +498,13 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
           <h1 class="sub-header">메뉴 목록</h1>
-          <button class="Menu_Client_button" onclick = See_JongHap_menu()>종합관</button>
-          <button class="Menu_Distribution_button" onclick = See_TIP_menu()>TIP</button>
-          <button class="Menu_Restaurant_button" onclick = See_Sanyung_menu()>산융</button>
-          <button class="Menu_Waiting_time_button" onclick = See_Olive_menu()>Olive</button></br>
+          <button type="button" class="btn btn-primary" onclick = See_JongHap_menu()>종합관</button>
+          <button type="button" class="btn btn-primary" onclick = See_TIP_menu()>TIP</button>
+          <button type="button" class="btn btn-primary" onclick = See_Sanyung_menu()>산융</button>
+          <button type="button" class="btn btn-primary" onclick = See_Olive_menu()>Olive</button></br></br>
 
 
-          <div class="Menu_JongHap_table" style = "display:none">
+          <div class="Menu_JongHap_table" style = "display:none;">
           <div class="table-responsive">
             <table class="table table-striped"  id="Menu_JongHap_table" style ="width:300px; box-sizing: border-box; border: 1px solid #444444;">
               <thead>
@@ -489,7 +518,7 @@
           </div>
 
 
-          <div class="Menu_TIP_table" style = "display:none">
+          <div class="Menu_TIP_table" style = "display:none;">
           <div class="table-responsive">
             <table class="table table-striped"  id="Menu_TIP_table" style ="width:300px; box-sizing: border-box; border: 1px solid #444444;">
               <thead>
@@ -503,7 +532,7 @@
           </div>
 
 
-          <div class="Menu_Sanyung_table" style = "display:none">
+          <div class="Menu_Sanyung_table" style = "display:none;">
           <div class="table-responsive">
             <table class="table table-striped"  id="Menu_Sanyung_table" style ="width:300px; box-sizing: border-box; border: 1px solid #444444;">
               <thead>
@@ -517,7 +546,7 @@
           </div>
 
 
-          <div class="Menu_Olive_table" style = "display:none">
+          <div class="Menu_Olive_table" style = "display:none;">
           <div class="table-responsive">
             <table class="table table-striped"  id="Menu_Olive_table" style ="width:300px; box-sizing: border-box; border: 1px solid #444444;">
               <thead>
@@ -532,35 +561,50 @@
 
           <h1 class="sub-header">메뉴 관리</h1>
           <div>
-            <select id="restaurant">
+            <select id="restaurant_CRUD">
               <option value="JongHap">JongHap</option>
               <option value="TIP">TIP</option>
               <option value="Sanyung">Sanyung</option>
               <option value="Olive">Olive</option>
             </select>
-          </div></br></br>
-          <div style="width:210px; height:230px; float:left; border:1px solid gray; border-radius: 10px; margin:10px; padding:10px">
+          </div></br>
+          <div style="width:210px; height:250px; float:left; border:1px solid gray; border-radius: 10px; margin:10px; padding:10px">
             <text style = "float:left; margin-right:10px;"> 메뉴 </text>
             <input type = "text" id = "Menu_table_push_name" size= "12" style = "float:left;"> <br/><br/>
             <text style = "float:left; margin-right:10px;"> 가격 </text>
             <input type = "text" id = "Menu_table_push_price" size= "12" style = "float:left;"> <br/><br/>
-            <button onclick = Menu_table_push()>추가</button>
-            <button onclick = Menu_table_delete()>삭제</button>
+            <button type="button" class="btn btn-primary" onclick = Menu_table_push()>추가</button>
+            <button type="button" class="btn btn-primary" onclick = Menu_table_delete()>삭제</button>
           </div>
-          <div style="width:210px; height:230px; float:left; border:1px solid gray; border-radius: 10px; margin:10px; padding:10px">
+          <div style="width:210px; height:250px; float:left; border:1px solid gray; border-radius: 10px; margin:10px; padding:10px">
             <text style = "float:left; margin-right:10px;"> 이름 </text>
             <input type = "text" id = "image_push_name" size= "12" style = "float:left;"> <br/><br/>
-            <input type="file" id="input_image" accept="img/*" onchange="previewImage(this,'View_area')">
-            <div id='View_area' style='position:relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'></div>
-            <button class="upload_btn" onclick="upload_image();">이미지 업로드</button>
+            <div class="filebox">
+              <label for="input_image">이미지 선택</label>
+              <input type="file" id="input_image" accept="img/*" onchange="previewImage(this,'View_area')">
+            </div>
+            <div id='View_area' style='position:relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'></div></br>
+            <button type="button" class="btn btn-primary" onclick="upload_image();">이미지 업로드</button>
           </div>
 
         </div>
         </div>
 
 
-        <div class = "monitor_table" style ="display:none; text-align:center;">
-          <img id="myimg">
+        <div class = "monitor_table" style ="display:none;">
+          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div style="width:700px;">
+            <h1 class="sub-header">현장 분포</h1>
+            <select id="restaurant_distribution">
+              <option value="JongHap">JongHap</option>
+              <option value="TIP">TIP</option>
+              <option value="Sanyung">Sanyung</option>
+              <option value="Olive">Olive</option>
+            </select><button type="button" class="btn btn-primary" style="margin-left:10px;" onclick="see_distribution();">선택</button>
+            <input type='text' style="float:right; background-color:transparent ;border:0 solid black; text-align:right;" id="distribution_people"/>
+            </div></br>
+            <img id="myimg" width="700" height="700">
+          </div>
         </div>
 
 
@@ -922,7 +966,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
   function Menu_table_push() {
     var database = firebase.database();
-    var restaurant = document.getElementById("restaurant");
+    var restaurant = document.getElementById("restaurant_CRUD");
     var restaurant_value = restaurant.options[restaurant.selectedIndex].value;
     var Menu_table_push_name = document.getElementById("Menu_table_push_name").value;
     var Menu_table_push_price = document.getElementById("Menu_table_push_price").value;
@@ -937,7 +981,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
   function Menu_table_delete() {
     var database = firebase.database();
-    var restaurant = document.getElementById("restaurant");
+    var restaurant = document.getElementById("restaurant_CRUD");
     var restaurant_value = restaurant.options[restaurant.selectedIndex].value;
     var Menu_table_push_name = document.getElementById("Menu_table_push_name").value;
     var Menu_table_push_price = document.getElementById("Menu_table_push_price").value;
@@ -999,7 +1043,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
       });
     });
 
-    database.ref('Distribution_DB/Tip/').once('value', function(snapshot) {
+    database.ref('Distribution_DB/TIP/').once('value', function(snapshot) {
 
       snapshot.forEach(function(childSnapshot) {
         var val = childSnapshot.val();
@@ -1067,21 +1111,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     waiting_graph.style.display = 'none';
     monitor_table.style.display = 'block';
 
-    download_image();
-  }
-
-  function download_image() {
-    var storage = firebase.storage().ref();
-    var storageRef = storage.child('result_image.png');
-    var img = document.getElementById('myimg');
-
-    storageRef.getDownloadURL().then(function(url) {
-
-      img.src = url;
-
-    }).catch(function(error) {
-      alert('error');
-    });
+    see_distribution();
   }
 
   function previewImage(targetObj, View_area) {
@@ -1153,7 +1183,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
   }
 
   function upload_image() {
-    var restaurant = document.getElementById("restaurant");
+    var restaurant = document.getElementById("restaurant_CRUD");
     var restaurant_value = restaurant.options[restaurant.selectedIndex].value;
     var image_name = document.getElementById("image_push_name");
     var storage = firebase.storage().ref();
@@ -1167,6 +1197,39 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     alert('업로드 완료');
 
 
+  }
+
+  function see_distribution() {
+    var database = firebase.database();
+    var myimg = document.getElementById("myimg");
+    var text_box = document.getElementById("distribution_people");
+    var restaurant = document.getElementById("restaurant_distribution");
+    var restaurant_value = restaurant.options[restaurant.selectedIndex].value;
+
+    download_image(restaurant_value);
+
+    database.ref('Distribution_DB/' + restaurant_value + '/').once('value', function(snapshot) {
+
+      snapshot.forEach(function(childSnapshot) {
+        text_box.value = childSnapshot.val() + '명';
+      });
+
+    });
+
+  }
+
+  function download_image(restaurant_value) {
+    var storage = firebase.storage().ref();
+    var storageRef = storage.child('result_image.png'); //'food_img/' + restaurant_value + '/1.jpg'
+    var img = document.getElementById('myimg');
+
+    storageRef.getDownloadURL().then(function(url) {
+
+      img.src = url;
+
+    }).catch(function(error) {
+      alert('error');
+    });
   }
 
 
