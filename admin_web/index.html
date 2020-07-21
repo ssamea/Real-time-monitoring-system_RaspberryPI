@@ -3,6 +3,7 @@
 
 <style>
 
+/*/////////////////////////// input file 디자인 ///////////////////////////*/
 .filebox label {
   display: inline-block;
   padding: .5em .75em;
@@ -10,7 +11,7 @@
   font-size: inherit;
   line-height: normal;
   vertical-align: middle;
-  background-color: #0077cc;
+  background-color: #3399cc;
   cursor: pointer;
   border: 1px solid #0055cc;
   border-radius: .25em;
@@ -37,21 +38,21 @@
   border: 0;
 }
 
+/*/////////////////////////// 주문 현황 표 병렬화 ///////////////////////////*/
  .parent{
-   width: 90%;
    margin: 10px auto;
    display: flex;
  }
 
  .first {
-   border: 1px solid red;
+   border: 1px solid #006699;
    flex:1;
    width:30%;
    box-sizing: border-box;
  }
 
  .second{
-   border: 1px solid green;
+   border: 1px solid #3399cc;
    flex:1;
    margin: 0px 5%;
    width:30%;
@@ -59,20 +60,21 @@
  }
 
  .third{
-   border: 1px solid blue;
+   border: 1px solid #66ccff;
    flex:1;
    width:30%;
    box-sizing: border-box;
  }
 
  .fourth{
-   border: 1px solid gray;
+   border: 1px solid #009999;
    flex:1;
    margin: 0px 5%;
    width:30%;
    box-sizing: border-box;
  }
 
+/*/////////////////////////// 현장 인원 분포도 그래프 디자인 ///////////////////////////*/
  @@keyframes p-0{from{width:0}to{width:0%}}
  @keyframes p-5{from{width:0}to{width:5%}}
  @keyframes p-10{from{width:0}to{width:10%}}
@@ -137,14 +139,14 @@
  li.p-85::before{content:"17명"}
  li.p-90::before{content:"18명"}
  li.p-95::before{content:"19명"}
- li.p-100::before{content:"20명"}
+ li.p-100::before{content:"20명~"}
 
  .percent-indicator .per-0::before{content:'0'}
  .percent-indicator .per-20::before{content:'4'}
  .percent-indicator .per-40::before{content:'8'}
  .percent-indicator .per-60::before{content:'12'}
  .percent-indicator .per-80::before{content:'16'}
- .percent-indicator .per-100::before{content:'20'}
+ .percent-indicator .per-100::before{content:'20~'}
 
 
  *, *::before, *::after {
@@ -244,7 +246,7 @@
  .graph-wrapper li.item1 {
   margin-bottom:5px;
   padding:10px 5px;
-  background:#ff0000;
+  background:#006699;
   color:#fff;
   text-align: left
  }
@@ -252,7 +254,7 @@
  .graph-wrapper li.item2 {
   margin-bottom:5px;
   padding:10px 5px;
-  background:#00ff00;
+  background:#3399cc;
   color:#fff;
   text-align: left
  }
@@ -260,7 +262,7 @@
  .graph-wrapper li.item3 {
   margin-bottom:5px;
   padding:10px 5px;
-  background:#0000ff;
+  background:#66ccff;
   color:#fff;
   text-align: left
  }
@@ -268,7 +270,7 @@
  .graph-wrapper li.item4 {
   margin-bottom:5px;
   padding:10px 5px;
-  background:#000000;
+  background:#009999;
   color:#fff;
   text-align: left
  }
@@ -360,19 +362,20 @@
 
     <div class="container-fluid" >
       <div class="row">
+
+        <!-- /////////////////////////// 사이드바 /////////////////////////// -->
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li><a href="#" onclick = "open_graph();"> 대기시간/현장인원분포</a></li>
-            <li><a href="#" onclick = "open_restaurant_menu();">음식 메뉴 관리</a></li>
             <li><a href="#" onclick = "open_order_table();">주문 현황</a></li>
+            <li><a href="#" onclick = "open_restaurant_menu();">음식 메뉴 관리</a></li>
             <li><a href="https://console.firebase.google.com/project/graduate-work-462b3/authentication/users?hl=ko">회원 현황</a></li>
             <li><a href="#" onclick = "open_monitor_table();">영상 모니터링</a></li>
           </ul>
         </div>
 
 
-
-
+        <!-- /////////////////////////// 대기시간/현장인원분포 탭 /////////////////////////// -->
         <div class = "waiting_graph" style = "display:none;">
 
           <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -426,10 +429,9 @@
 
 
 
-
+        <!-- /////////////////////////// 주문 현황 탭 /////////////////////////// -->
         <div class = "order_table" style = "display:none">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
           <h1 class="sub-header">주문 현황</h1>
           <button type="button" class="btn btn-primary" onclick=order_menu_refresh()>새로고침</button>
           <div class="table-responsive">
@@ -493,7 +495,7 @@
 
 
 
-
+        <!-- /////////////////////////// 음식 메뉴 관리 탭 /////////////////////////// -->
         <div class = "menu_table" style = "display:none">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
@@ -560,15 +562,16 @@
           </div>
 
           <h1 class="sub-header">메뉴 관리</h1>
-          <div>
+          <div style="width:485px; height:320px; border:1px solid gray;margin:10px; padding:10px">
+          <div><text style="font-size:1.5em">수정할 식당 선택&nbsp;&nbsp;</text>
             <select id="restaurant_CRUD">
               <option value="JongHap">JongHap</option>
               <option value="TIP">TIP</option>
               <option value="Sanyung">Sanyung</option>
               <option value="Olive">Olive</option>
             </select>
-          </div></br>
-          <div style="width:210px; height:250px; float:left; border:1px solid gray; border-radius: 10px; margin:10px; padding:10px">
+          </div>
+          <div style="width:210px; height:250px; float:left; border:1px solid gray; margin:10px; padding:10px">
             <text style = "float:left; margin-right:10px;"> 메뉴 </text>
             <input type = "text" id = "Menu_table_push_name" size= "12" style = "float:left;"> <br/><br/>
             <text style = "float:left; margin-right:10px;"> 가격 </text>
@@ -576,7 +579,7 @@
             <button type="button" class="btn btn-primary" onclick = Menu_table_push()>추가</button>
             <button type="button" class="btn btn-primary" onclick = Menu_table_delete()>삭제</button>
           </div>
-          <div style="width:210px; height:250px; float:left; border:1px solid gray; border-radius: 10px; margin:10px; padding:10px">
+          <div style="width:210px; height:250px; float:left; border:1px solid gray;  margin:10px; padding:10px">
             <text style = "float:left; margin-right:10px;"> 이름 </text>
             <input type = "text" id = "image_push_name" size= "12" style = "float:left;"> <br/><br/>
             <div class="filebox">
@@ -586,11 +589,15 @@
             <div id='View_area' style='position:relative; width: 100px; height: 100px; color: black; border: 0px solid black; dispaly: inline;'></div></br>
             <button type="button" class="btn btn-primary" onclick="upload_image();">이미지 업로드</button>
           </div>
+          </div>
 
         </div>
         </div>
 
 
+
+
+        <!-- /////////////////////////// 영상 모니터링 탭 /////////////////////////// -->
         <div class = "monitor_table" style ="display:none;">
           <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div style="width:700px;">
@@ -601,7 +608,7 @@
               <option value="Sanyung">Sanyung</option>
               <option value="Olive">Olive</option>
             </select><button type="button" class="btn btn-primary" style="margin-left:10px;" onclick="see_distribution();">선택</button>
-            <input type='text' style="float:right; background-color:transparent ;border:0 solid black; text-align:right;" id="distribution_people"/>
+            <input type='text' style="float:right; background-color:transparent ;border:0 solid black; text-align:right; font-size:1.5em;" id="distribution_people"/>
             </div></br>
             <img id="myimg" width="700" height="700">
           </div>
@@ -710,6 +717,101 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
   firebase.analytics();
 
 
+  <!-- /////////////////////////// 대기시간/현장인원분포_그래프 오픈 /////////////////////////// -->
+  function open_graph() {
+    var order_table = document.getElementsByClassName("order_table")[0];
+    var menu_table = document.getElementsByClassName("menu_table")[0];
+    var waiting_graph = document.getElementsByClassName("waiting_graph")[0];
+    var monitor_table = document.getElementsByClassName("monitor_table")[0];
+
+    order_table.style.display = 'none';
+    menu_table.style.display = 'none';
+    waiting_graph.style.display = 'block';
+    monitor_table.style.display = 'none';
+
+    refresh_graph();
+    Waiting_Table_refresh();
+
+  }
+
+  <!-- /////////////////////////// 대기시간/현장인원분포_그래프 새로고침 /////////////////////////// -->
+  function refresh_graph() {
+    var database = firebase.database();
+    var JongHap_item = document.getElementById('JongHap_item');
+    var TIP_item = document.getElementById('TIP_item');
+    var Sanyung_item = document.getElementById('Sanyung_item');
+    var Olive_item = document.getElementById('Olive_item');
+
+    database.ref('Distribution_DB/JongHap/').once('value', function(snapshot) {
+
+      snapshot.forEach(function(childSnapshot) {
+        var val = childSnapshot.val();
+
+
+        JongHap_item.classList.add('item1');
+        JongHap_item.classList.add('p-' + val*5);
+
+      });
+    });
+
+    database.ref('Distribution_DB/TIP/').once('value', function(snapshot) {
+
+      snapshot.forEach(function(childSnapshot) {
+        var val = childSnapshot.val();
+
+        TIP_item.classList.add('item2');
+        TIP_item.classList.add('p-' + val*5);
+
+      });
+    });
+
+    database.ref('Distribution_DB/Sanyung/').once('value', function(snapshot) {
+
+      snapshot.forEach(function(childSnapshot) {
+        var val = childSnapshot.val();
+
+        Sanyung_item.classList.add('item3');
+        Sanyung_item.classList.add('p-' + val*5);
+
+      });
+    });
+
+    database.ref('Distribution_DB/Olive/').once('value', function(snapshot) {
+
+      snapshot.forEach(function(childSnapshot) {
+        var val = childSnapshot.val();
+
+        Olive_item.classList.add('item4');
+        Olive_item.classList.add('p-' + val*5);
+
+      });
+    });
+
+  }
+
+  <!-- /////////////////////////// 대기시간/현장인원분포_대기시간 새로고침 /////////////////////////// -->
+  function Waiting_Table_refresh() {
+    var database = firebase.database();
+    var waiting_table = document.getElementsByClassName("waiting_table")[0];
+
+    firebase.database().ref('Waiting_time_DB/').once('value', function(snapshot) {
+
+      //var rows = [];
+      var content = '';
+      snapshot.forEach(function(childSnapshot) {
+        var val = childSnapshot.val();
+        var key = childSnapshot.key;
+        content +='<tr>';
+        content += '<td>' + key + '</td>';
+        content += '<td>' + val.Waiting_time + '</td>';
+        content += '</tr>';
+      });
+      $('#waiting_table').html("<thead><tr><th>음식점</th><th>대기시간</th></tr></thead><tbody></tbody>");
+      $('#waiting_table').append(content);
+    });
+  }
+
+  <!-- /////////////////////////// 주문 현황 탭 오픈 /////////////////////////// -->
   function open_order_table() {
     var order_table = document.getElementsByClassName("order_table")[0];
     var menu_table = document.getElementsByClassName("menu_table")[0];
@@ -730,6 +832,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
   }
 
+  <!-- /////////////////////////// 주문 현황 표 새로고침 /////////////////////////// -->
   function order_menu_refresh() {
     var database = firebase.database();
     var order_table_JongHap = document.getElementById("order_table_JongHap");
@@ -799,7 +902,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
 
 
-
+  <!-- /////////////////////////// 음식 메뉴 관리 탭 오픈 /////////////////////////// -->
   function open_restaurant_menu() {
     var order_table = document.getElementsByClassName("order_table")[0];
     var menu_table = document.getElementsByClassName("menu_table")[0];
@@ -816,6 +919,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     See_JongHap_menu()
   }
 
+  <!-- /////////////////////////// 음식 메뉴 관리_종합관 메뉴 목록 출력 /////////////////////////// -->
   function See_JongHap_menu() {
     var database = firebase.database();
     var Menu_JongHap_table = document.getElementsByClassName("Menu_JongHap_table")[0];
@@ -833,6 +937,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
   }
 
+  <!-- /////////////////////////// 음식 메뉴 관리_종합관 메뉴 목록 새로고침 /////////////////////////// -->
   function JongHap_Table_refresh() {
     var database = firebase.database();
     var Menu_JongHap_table = document.getElementsByClassName("Menu_JongHap_table")[0];
@@ -853,6 +958,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
    });
   }
 
+  <!-- /////////////////////////// 음식 메뉴 관리_TIP 메뉴 목록 출력 /////////////////////////// -->
   function See_TIP_menu() {
     var database = firebase.database();
     var Menu_JongHap_table = document.getElementsByClassName("Menu_JongHap_table")[0];
@@ -870,6 +976,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
   }
 
+ <!-- /////////////////////////// 음식 메뉴 관리_TIP 메뉴 목록 새로고침 /////////////////////////// -->
   function TIP_Table_refresh() {
     var database = firebase.database();
     var Menu_TIP_table = document.getElementsByClassName("Menu_TIP_table")[0];
@@ -890,6 +997,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     });
   }
 
+  <!-- /////////////////////////// 음식 메뉴 관리_산융 메뉴 목록 오픈 /////////////////////////// -->
   function See_Sanyung_menu() {
     var database = firebase.database();
     var Menu_JongHap_table = document.getElementsByClassName("Menu_JongHap_table")[0];
@@ -907,6 +1015,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
   }
 
+  <!-- /////////////////////////// 음식 메뉴 관리_산융 메뉴 목록 새로고침 /////////////////////////// -->
   function Sanyung_Table_refresh() {
     var database = firebase.database();
     var Menu_Sanyung_table = document.getElementsByClassName("Menu_Sanyung_table")[0];
@@ -927,6 +1036,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     });
   }
 
+  <!-- /////////////////////////// 음식 메뉴 관리_Olive 메뉴 목록 출력 /////////////////////////// -->
   function See_Olive_menu() {
     var database = firebase.database();
     var Menu_JongHap_table = document.getElementsByClassName("Menu_JongHap_table")[0];
@@ -944,6 +1054,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
   }
 
+  <!-- /////////////////////////// 음식 메뉴 관리_Olive 메뉴 목록 새로고침 /////////////////////////// -->
   function Olive_Table_refresh() {
     var database = firebase.database();
     var Menu_Sanyung_table = document.getElementsByClassName("Menu_Olive_table")[0];
@@ -964,6 +1075,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     });
   }
 
+  <!-- /////////////////////////// 음식 메뉴 관리_메뉴 추가 /////////////////////////// -->
   function Menu_table_push() {
     var database = firebase.database();
     var restaurant = document.getElementById("restaurant_CRUD");
@@ -972,13 +1084,14 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     var Menu_table_push_price = document.getElementById("Menu_table_push_price").value;
 
     database.ref('Menu_DB/' + restaurant_value + '/').push({
-      menu_name: Menu_table_push_name, price: Menu_table_push_price
+      menu_name: Menu_table_push_name, price: Number(Menu_table_push_price)
     });
 
     See_JongHap_menu()
 
   }
 
+  <!-- /////////////////////////// 음식 메뉴 관리_메뉴 삭제 /////////////////////////// -->
   function Menu_table_delete() {
     var database = firebase.database();
     var restaurant = document.getElementById("restaurant_CRUD");
@@ -1002,118 +1115,9 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
     });
 
-
   }
 
-  function open_graph() {
-    var order_table = document.getElementsByClassName("order_table")[0];
-    var menu_table = document.getElementsByClassName("menu_table")[0];
-    var waiting_graph = document.getElementsByClassName("waiting_graph")[0];
-    var monitor_table = document.getElementsByClassName("monitor_table")[0];
-
-
-    order_table.style.display = 'none';
-    menu_table.style.display = 'none';
-    waiting_graph.style.display = 'block';
-    monitor_table.style.display = 'none';
-
-    refresh_graph();
-    Waiting_Table_refresh();
-
-
-  }
-
-  function refresh_graph() {
-    var database = firebase.database();
-    var JongHap_item = document.getElementById('JongHap_item');
-    var TIP_item = document.getElementById('TIP_item');
-    var Sanyung_item = document.getElementById('Sanyung_item');
-    var Olive_item = document.getElementById('Olive_item');
-
-
-    database.ref('Distribution_DB/JongHap/').once('value', function(snapshot) {
-
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-
-
-        JongHap_item.classList.add('item1');
-        JongHap_item.classList.add('p-' + val*5);
-
-      });
-    });
-
-    database.ref('Distribution_DB/TIP/').once('value', function(snapshot) {
-
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-
-        TIP_item.classList.add('item2');
-        TIP_item.classList.add('p-' + val*5);
-
-      });
-    });
-
-    database.ref('Distribution_DB/Sanyung/').once('value', function(snapshot) {
-
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-
-        Sanyung_item.classList.add('item3');
-        Sanyung_item.classList.add('p-' + val*5);
-
-      });
-    });
-
-    database.ref('Distribution_DB/Olive/').once('value', function(snapshot) {
-
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-
-        Olive_item.classList.add('item4');
-        Olive_item.classList.add('p-' + val*5);
-
-      });
-    });
-
-  }
-
-  function Waiting_Table_refresh() {
-    var database = firebase.database();
-    var waiting_table = document.getElementsByClassName("waiting_table")[0];
-
-    firebase.database().ref('Waiting_time_DB/').once('value', function(snapshot) {
-
-      //var rows = [];
-      var content = '';
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-        var key = childSnapshot.key;
-        content +='<tr>';
-        content += '<td>' + key + '</td>';
-        content += '<td>' + val.Waiting_time + '</td>';
-        content += '</tr>';
-      });
-      $('#waiting_table').html("<thead><tr><th>음식점</th><th>대기시간</th></tr></thead><tbody></tbody>");
-      $('#waiting_table').append(content);
-   });
-  }
-
-  function open_monitor_table() {
-    var order_table = document.getElementsByClassName("order_table")[0];
-    var menu_table = document.getElementsByClassName("menu_table")[0];
-    var waiting_graph = document.getElementsByClassName("waiting_graph")[0];
-    var monitor_table = document.getElementsByClassName("monitor_table")[0];
-
-
-    order_table.style.display = 'none';
-    menu_table.style.display = 'none';
-    waiting_graph.style.display = 'none';
-    monitor_table.style.display = 'block';
-
-    see_distribution();
-  }
-
+  <!-- /////////////////////////// 음식 메뉴 관리_업로드 이미지 미리보기 /////////////////////////// -->
   function previewImage(targetObj, View_area) {
 	   var preview = document.getElementById(View_area); //div id
 	   var ua = window.navigator.userAgent;
@@ -1182,6 +1186,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
      }
   }
 
+  <!-- /////////////////////////// 음식 메뉴 관리_이미지 업로드 /////////////////////////// -->
   function upload_image() {
     var restaurant = document.getElementById("restaurant_CRUD");
     var restaurant_value = restaurant.options[restaurant.selectedIndex].value;
@@ -1199,6 +1204,23 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
   }
 
+  <!-- /////////////////////////// 영상 모니터링_모니터링 화면 오픈 /////////////////////////// -->
+  function open_monitor_table() {
+    var order_table = document.getElementsByClassName("order_table")[0];
+    var menu_table = document.getElementsByClassName("menu_table")[0];
+    var waiting_graph = document.getElementsByClassName("waiting_graph")[0];
+    var monitor_table = document.getElementsByClassName("monitor_table")[0];
+
+
+    order_table.style.display = 'none';
+    menu_table.style.display = 'none';
+    waiting_graph.style.display = 'none';
+    monitor_table.style.display = 'block';
+
+    see_distribution();
+  }
+
+  <!-- /////////////////////////// 영상 모니터링_분포 인원 출력 /////////////////////////// -->
   function see_distribution() {
     var database = firebase.database();
     var myimg = document.getElementById("myimg");
@@ -1218,9 +1240,10 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
   }
 
+  <!-- /////////////////////////// 영상 모니터링_현장 분포도 출력 /////////////////////////// -->
   function download_image(restaurant_value) {
     var storage = firebase.storage().ref();
-    var storageRef = storage.child('result_image.png'); //'food_img/' + restaurant_value + '/1.jpg'
+    var storageRef = storage.child('food_img/' + restaurant_value + '/view.jpg');
     var img = document.getElementById('myimg');
 
     storageRef.getDownloadURL().then(function(url) {
