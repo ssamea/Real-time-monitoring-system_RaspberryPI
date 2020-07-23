@@ -75,7 +75,7 @@
  }
 
 /*/////////////////////////// 현장 인원 분포도 그래프 디자인 ///////////////////////////*/
- @@keyframes p-0{from{width:0}to{width:0%}}
+ @keyframes p-0{from{width:0}to{width:1%}}
  @keyframes p-5{from{width:0}to{width:5%}}
  @keyframes p-10{from{width:0}to{width:10%}}
  @keyframes p-15{from{width:0}to{width:15%}}
@@ -97,9 +97,9 @@
  @keyframes p-95{from{width:0}to{width:95%}}
  @keyframes p-100{from{width:0}to{width:100%}}
 
- li.p-0{width:0%;animation:p-5 .1s}
+ li.p-0{width:1%;animation:p-5 .1s}
  li.p-5{width:5%;animation:p-5 .1s}
- li.p-10{width:5%;animation:p-10 .2s}
+ li.p-10{width:10%;animation:p-10 .2s}
  li.p-15{width:15%;animation:p-15 .3s}
  li.p-20{width:20%;animation:p-20 .4s}
  li.p-25{width:25%;animation:p-25 .5s}
@@ -119,9 +119,9 @@
  li.p-95{width:95%;animation:p-95 1.9s}
  li.p-100{width:100%;animation:p-100 2s}
 
- li.p-0::before{content:"0"}
- li.p-5::before{content:"1"}
- li.p-10::before{content:"2"}
+ li.p-0::before{content:"0명"}
+ li.p-5::before{content:"1명"}
+ li.p-10::before{content:"2명"}
  li.p-15::before{content:"3명"}
  li.p-20::before{content:"4명"}
  li.p-25::before{content:"5명"}
@@ -380,7 +380,8 @@
 
           <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1  class="sub-header">현장인원분포</h1>
-            <div class="graph-wrapper" style="width:600px; height:400px;">
+            <button type="button" class="btn btn-primary" onclick=refresh_graph()>새로고침</button></br></br>
+            <div id = "test" class="graph-wrapper" style="width:600px; height:400px;">
               <div class="percent-indicator">
                 <div class="per-0"></div>
                 <div class="per-20"></div>
@@ -390,10 +391,10 @@
                 <div class="per-100"></div>
               </div>
               <ul class="graph">
-                <li class="" id="JongHap_item"></li>
-                <li class="" id="TIP_item"></li>
-                <li class="" id="Sanyung_item"></li>
-                <li class="" id="Olive_item"></li>
+                <li style="word-break:keep-all;" class="" id="JongHap_item"></li>
+                <li style="word-break:keep-all;" class="" id="TIP_item"></li>
+                <li style="word-break:keep-all;" class="" id="Sanyung_item"></li>
+                <li style="word-break:keep-all;" class="" id="Olive_item"></li>
               </ul>
             </div>
           </div>
@@ -404,7 +405,7 @@
           <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
             <h1 class="sub-header">대기시간</h1>
-
+            <button type="button" class="btn btn-primary" onclick=Waiting_Table_refresh()>새로고침</button></br></br>
             <div class="table-responsive" style="width:500px; height:500px;">
               <table class="table table-striped"  id="waiting_table" style ="width:50%; box-sizing: border-box; border: 1px solid #444444;">
                 <thead>
@@ -560,6 +561,9 @@
             </table>
           </div>
           </div>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
           <h1 class="sub-header">메뉴 관리</h1>
           <div style="width:485px; height:320px; border:1px solid gray;margin:10px; padding:10px">
@@ -736,53 +740,37 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
 
   <!-- /////////////////////////// 대기시간/현장인원분포_그래프 새로고침 /////////////////////////// -->
   function refresh_graph() {
+    refresh_graph_inner('JongHap');
+    refresh_graph_inner('TIP');
+    refresh_graph_inner('Sanyung');
+    refresh_graph_inner('Olive');
+  }
+
+  function refresh_graph_inner(restaurant) {
     var database = firebase.database();
-    var JongHap_item = document.getElementById('JongHap_item');
-    var TIP_item = document.getElementById('TIP_item');
-    var Sanyung_item = document.getElementById('Sanyung_item');
-    var Olive_item = document.getElementById('Olive_item');
+    var item = document.getElementById(restaurant + '_item');
 
-    database.ref('Distribution_DB/JongHap/').once('value', function(snapshot) {
+    database.ref('Distribution_DB/' + restaurant + '/').once('value', function(snapshot) {
 
       snapshot.forEach(function(childSnapshot) {
         var val = childSnapshot.val();
+        if (val>=20) {
+          val = 20;
+        }
 
+        item.classList.remove(...item.classList);
 
-        JongHap_item.classList.add('item1');
-        JongHap_item.classList.add('p-' + val*5);
+        if (restaurant === 'JongHap') {
+          item.classList.add('item1');
+        } else if (restaurant === 'TIP') {
+          item.classList.add('item2');
+        } else if (restaurant === 'Sanyung') {
+          item.classList.add('item3');
+        } else {
+          item.classList.add('item4');
+        }
 
-      });
-    });
-
-    database.ref('Distribution_DB/TIP/').once('value', function(snapshot) {
-
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-
-        TIP_item.classList.add('item2');
-        TIP_item.classList.add('p-' + val*5);
-
-      });
-    });
-
-    database.ref('Distribution_DB/Sanyung/').once('value', function(snapshot) {
-
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-
-        Sanyung_item.classList.add('item3');
-        Sanyung_item.classList.add('p-' + val*5);
-
-      });
-    });
-
-    database.ref('Distribution_DB/Olive/').once('value', function(snapshot) {
-
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-
-        Olive_item.classList.add('item4');
-        Olive_item.classList.add('p-' + val*5);
+        item.classList.add('p-' + val*5);
 
       });
     });
@@ -809,6 +797,7 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
       $('#waiting_table').html("<thead><tr><th>음식점</th><th>대기시간</th></tr></thead><tbody></tbody>");
       $('#waiting_table').append(content);
     });
+
   }
 
   <!-- /////////////////////////// 주문 현황 탭 오픈 /////////////////////////// -->
@@ -818,89 +807,53 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     var waiting_graph = document.getElementsByClassName("waiting_graph")[0];
     var monitor_table = document.getElementsByClassName("monitor_table")[0];
 
-
     order_table.style.display = 'block';
     menu_table.style.display = 'none';
     waiting_graph.style.display = 'none';
     monitor_table.style.display = 'none';
 
-
-
-
     order_menu_refresh();
-
 
   }
 
   <!-- /////////////////////////// 주문 현황 표 새로고침 /////////////////////////// -->
   function order_menu_refresh() {
+    order_menu_refresh_inner('JongHap');
+    order_menu_refresh_inner('TIP');
+    order_menu_refresh_inner('Sanyung');
+    order_menu_refresh_inner('Olive');
+  }
+
+  function order_menu_refresh_inner(restaurant) {
     var database = firebase.database();
-    var order_table_JongHap = document.getElementById("order_table_JongHap");
-    var order_table_TIP = document.getElementById("order_table_TIP");
-    var order_table_Sanyung = document.getElementById("order_table_Sanyung");
-    var order_table_Olive = document.getElementById("order_table_Olive");
+    var order_table = document.getElementById("order_table" + restaurant);
 
-    firebase.database().ref('Restaurant_DB/Real_time/JongHap/').once('value', function(snapshot) {
+    firebase.database().ref('Restaurant_DB/Real_time/' + restaurant + '/').once('value', function(snapshot) {
 
-      //var rows = [];
       var content = '';
+      var temp = '';
       snapshot.forEach(function(childSnapshot) {
         var val = childSnapshot.val();
         content +='<tr>';
         content += '<td>' + val.order_food + '</td>';
         content += '</tr>';
        });
-       $('#order_table_JongHap').html("<thead><tr><th>종합관</th></tr></thead><tbody></tbody>");
-       $('#order_table_JongHap').append(content);
-    });
 
-    firebase.database().ref('Restaurant_DB/Real_time/TIP/').once('value', function(snapshot) {
+       if (restaurant === 'JongHap') {
+         temp = '종합관';
+       } else if (restaurant === 'TIP') {
+         temp = 'TIP';
+       } else if (restaurant === 'Sanyung') {
+         temp = '산융';
+       } else {
+         temp = 'Olive';
+       }
 
-      //var rows = [];
-      var content = '';
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-        content +='<tr>';
-        content += '<td>' + val.order_food + '</td>';
-        content += '</tr>';
-       });
-       $('#order_table_TIP').html("<thead><tr><th>TIP</th></tr></thead><tbody></tbody>");
-       $('#order_table_TIP').append(content);
-    });
-
-    firebase.database().ref('Restaurant_DB/Real_time/Sanyung/').once('value', function(snapshot) {
-
-      //var rows = [];
-      var content = '';
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-        content +='<tr>';
-        content += '<td>' + val.order_food + '</td>';
-        content += '</tr>';
-       });
-       $('#order_table_Sanyung').html("<thead><tr><th>산융</th></tr></thead><tbody></tbody>");
-       $('#order_table_Sanyung').append(content);
-    });
-
-    firebase.database().ref('Restaurant_DB/Real_time/Olive/').once('value', function(snapshot) {
-
-      //var rows = [];
-      var content = '';
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-        content +='<tr>';
-        content += '<td>' + val.order_food + '</td>';
-        content += '</tr>';
-       });
-       $('#order_table_Olive').html("<thead><tr><th>Olive</th></tr></thead><tbody></tbody>");
-       $('#order_table_Olive').append(content);
+       $('#order_table_' + restaurant).html("<thead><tr><th>" + temp + "</th></tr></thead><tbody></tbody>");
+       $('#order_table_' + restaurant).append(content);
     });
 
   }
-
-
-
-
 
   <!-- /////////////////////////// 음식 메뉴 관리 탭 오픈 /////////////////////////// -->
   function open_restaurant_menu() {
@@ -909,14 +862,13 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     var waiting_graph = document.getElementsByClassName("waiting_graph")[0];
     var monitor_table = document.getElementsByClassName("monitor_table")[0];
 
-
     order_table.style.display = 'none';
     menu_table.style.display = 'block';
     waiting_graph.style.display = 'none';
     monitor_table.style.display = 'none';
 
-
     See_JongHap_menu()
+
   }
 
   <!-- /////////////////////////// 음식 메뉴 관리_종합관 메뉴 목록 출력 /////////////////////////// -->
@@ -932,30 +884,8 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     Menu_Sanyung_table.style.display = 'none';
     Menu_Olive_table.style.display = 'none';
 
-    JongHap_Table_refresh();
+    Table_refresh('JongHap');
 
-
-  }
-
-  <!-- /////////////////////////// 음식 메뉴 관리_종합관 메뉴 목록 새로고침 /////////////////////////// -->
-  function JongHap_Table_refresh() {
-    var database = firebase.database();
-    var Menu_JongHap_table = document.getElementsByClassName("Menu_JongHap_table")[0];
-
-    firebase.database().ref('Menu_DB/JongHap/').once('value', function(snapshot) {
-
-      //var rows = [];
-      var content = '';
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-        content +='<tr>';
-        content += '<td>' + val.menu_name + '</td>';
-        content += '<td>' + val.price + '</td>';
-        content += '</tr>';
-      });
-      $('#Menu_JongHap_table').html("<thead><tr><th>메뉴</th><th>가격</th></tr></thead><tbody></tbody>");
-      $('#Menu_JongHap_table').append(content);
-   });
   }
 
   <!-- /////////////////////////// 음식 메뉴 관리_TIP 메뉴 목록 출력 /////////////////////////// -->
@@ -971,30 +901,8 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     Menu_Sanyung_table.style.display = 'none';
     Menu_Olive_table.style.display = 'none';
 
-    TIP_Table_refresh();
+    Table_refresh('TIP');
 
-
-  }
-
- <!-- /////////////////////////// 음식 메뉴 관리_TIP 메뉴 목록 새로고침 /////////////////////////// -->
-  function TIP_Table_refresh() {
-    var database = firebase.database();
-    var Menu_TIP_table = document.getElementsByClassName("Menu_TIP_table")[0];
-
-    firebase.database().ref('Menu_DB/TIP/').once('value', function(snapshot) {
-
-      //var rows = [];
-      var content = '';
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-        content +='<tr>';
-        content += '<td>' + val.menu_name + '</td>';
-        content += '<td>' + val.price + '</td>';
-        content += '</tr>';
-      });
-      $('#Menu_TIP_table').html("<thead><tr><th>메뉴</th><th>가격</th></tr></thead><tbody></tbody>");
-      $('#Menu_TIP_table').append(content);
-    });
   }
 
   <!-- /////////////////////////// 음식 메뉴 관리_산융 메뉴 목록 오픈 /////////////////////////// -->
@@ -1010,30 +918,8 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     Menu_Sanyung_table.style.display = 'block';
     Menu_Olive_table.style.display = 'none';
 
-    Sanyung_Table_refresh();
+    Table_refresh('Sanyung');
 
-
-  }
-
-  <!-- /////////////////////////// 음식 메뉴 관리_산융 메뉴 목록 새로고침 /////////////////////////// -->
-  function Sanyung_Table_refresh() {
-    var database = firebase.database();
-    var Menu_Sanyung_table = document.getElementsByClassName("Menu_Sanyung_table")[0];
-
-    firebase.database().ref('Menu_DB/Sanyung/').once('value', function(snapshot) {
-
-      //var rows = [];
-      var content = '';
-      snapshot.forEach(function(childSnapshot) {
-        var val = childSnapshot.val();
-        content +='<tr>';
-        content += '<td>' + val.menu_name + '</td>';
-        content += '<td>' + val.price + '</td>';
-        content += '</tr>';
-      });
-      $('#Menu_Sanyung_table').html("<thead><tr><th>메뉴</th><th>가격</th></tr></thead><tbody></tbody>");
-      $('#Menu_Sanyung_table').append(content);
-    });
   }
 
   <!-- /////////////////////////// 음식 메뉴 관리_Olive 메뉴 목록 출력 /////////////////////////// -->
@@ -1049,19 +935,17 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
     Menu_Sanyung_table.style.display = 'none';
     Menu_Olive_table.style.display = 'block';
 
-    Olive_Table_refresh();
-
+    Table_refresh('Olive');
 
   }
 
-  <!-- /////////////////////////// 음식 메뉴 관리_Olive 메뉴 목록 새로고침 /////////////////////////// -->
-  function Olive_Table_refresh() {
+  <!-- /////////////////////////// 음식 메뉴 관리_메뉴 목록 새로고침 /////////////////////////// -->
+  function Table_refresh(restaurant) {
     var database = firebase.database();
-    var Menu_Sanyung_table = document.getElementsByClassName("Menu_Olive_table")[0];
+    var Menu_table = document.getElementsByClassName("Menu_" + restaurant + "_table")[0];
 
-    firebase.database().ref('Menu_DB/Olive/').once('value', function(snapshot) {
+    firebase.database().ref('Menu_DB/' + restaurant + '/').once('value', function(snapshot) {
 
-      //var rows = [];
       var content = '';
       snapshot.forEach(function(childSnapshot) {
         var val = childSnapshot.val();
@@ -1070,8 +954,8 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
         content += '<td>' + val.price + '</td>';
         content += '</tr>';
       });
-      $('#Menu_Olive_table').html("<thead><tr><th>메뉴</th><th>가격</th></tr></thead><tbody></tbody>");
-      $('#Menu_Olive_table').append(content);
+      $('#Menu_' + restaurant + '_table').html("<thead><tr><th>메뉴</th><th>가격</th></tr></thead><tbody></tbody>");
+      $('#Menu_' + restaurant + '_table').append(content);
     });
   }
 
