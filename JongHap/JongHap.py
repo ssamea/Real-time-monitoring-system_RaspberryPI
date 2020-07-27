@@ -243,6 +243,7 @@ class MyWindow(QWidget): #GUI창 설정
 
     def msgButtonClick(i):
         print("정상작동 주문완료")
+        i.btn_refresh()
 
 
 if __name__ == "__main__":
