@@ -16,127 +16,110 @@ JongHap_real_time_track = db.reference('Restaurant_DB/Real_time/JongHap/')
 Olive_real_time_track = db.reference('Restaurant_DB/Real_time/Olive/')
 Sanyung_real_time_track = db.reference('Restaurant_DB/Real_time/Sanyung/')
 TIP_real_time_track = db.reference('Restaurant_DB/Real_time/TIP/')
+Menu_track = db.reference('Menu_DB/')
 v = []
 
-global di
 global PAST_finish_time  # 이전 조리 완료 시간 ( ti-1 )
 global count
 global cnt
 global sample_num
 global finish_time
 
+di = []
+JongHap_Menu = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Olive_Menu = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sanyung_Menu = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+TIP_Menu = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+
+def load_Menu(restaurant):
+    global JongHap_Menu
+    global Olive_Menu
+    global Sanyung_Menu
+    global  TIP_Menu
+
+    l_snapshot = Menu_track.child(restaurant + '/').get()
+    count_sum = 0
+    for R_key in l_snapshot:
+        if restaurant == 'JongHap':
+            JongHap_Menu[count_sum] = db.reference('Menu_DB/%s/%s/menu_name' % (restaurant, R_key)).get()
+        elif restaurant == 'Olive':
+            Olive_Menu[count_sum] = db.reference('Menu_DB/%s/%s/menu_name' % (restaurant, R_key)).get()
+        elif restaurant == 'Sanyung':
+            Sanyung_Menu[count_sum] = db.reference('Menu_DB/%s/%s/menu_name' % (restaurant, R_key)).get()
+        elif restaurant == 'TIP':
+            TIP_Menu[count_sum] = db.reference('Menu_DB/%s/%s/menu_name' % (restaurant, R_key)).get()
+
+        count_sum += 1
+
 
 def jonghap_list_insert_count(r_order_food):
-    if r_order_food == '제육볶음':
-        i_count = 0
-    elif r_order_food == '김치볶음밥':
-        i_count = 1
-    elif r_order_food == '일반주먹밥':
-        i_count = 2
-    elif r_order_food == '김치주먹밥':
-        i_count = 3
-    elif r_order_food == '참치주먹밥':
-        i_count = 4
-    elif r_order_food == '볼케이노치밥':
-        i_count = 5
-    elif r_order_food == '스팸마요덮밥':
-        i_count = 6
-    elif r_order_food == '라면':
-        i_count = 7
-    elif r_order_food == '오므라이스':
-        i_count = 8
-    elif r_order_food == '부대찌개':
-        i_count = 9
-    elif r_order_food == '뚝배기불고기':
-        i_count = 10
-    elif r_order_food == '돈까스':
-        i_count = 11
-    return i_count
+    count_sum = 0
+    for i in range(0, 12):
+        if r_order_food == JongHap_Menu[i]:
+            j_count = count_sum
+        count_sum += 1
+
+    return j_count
 
 
 def olive_list_insert_count(r_order_food):
-    if r_order_food == '제육볶음':
-        i_count = 0
-    elif r_order_food == '돈까스김치볶음밥':
-        i_count = 1
-    elif r_order_food == '잔치국수':
-        i_count = 2
-    elif r_order_food == '돈까스카레덮밥':
-        i_count = 3
-    elif r_order_food == '떡국':
-        i_count = 4
-    elif r_order_food == '양파돈까스':
-        i_count = 5
-    elif r_order_food == '김치볶음밥':
-        i_count = 6
-    elif r_order_food == '등심돈까스':
-        i_count = 7
-    elif r_order_food == '치즈돈까스':
-        i_count = 8
-    elif r_order_food == '카레덮밥':
-        i_count = 9
-    elif r_order_food == '김치수제비':
-        i_count = 10
-    elif r_order_food == '함박스테이크':
-        i_count = 11
-    return i_count
+    count_sum = 0
+    for i in range(0, 12):
+        if r_order_food == Olive_Menu[i]:
+            o_count = count_sum
+        count_sum += 1
+
+    return o_count
 
 
 def sanyung_list_insert_count(r_order_food):
-    if r_order_food == '치즈김밥':
-        i_count = 0
-    elif r_order_food == '마요네즈김밥':
-        i_count = 1
-    elif r_order_food == '잔치국수':
-        i_count = 2
-    elif r_order_food == '제육덮밥':
-        i_count = 3
-    elif r_order_food == '갈비탕':
-        i_count = 4
-    elif r_order_food == '마파두부':
-        i_count = 5
-    elif r_order_food == '김치볶음밥':
-        i_count = 6
-    elif r_order_food == '스페셜떡볶이':
-        i_count = 7
-    elif r_order_food == '비빔냉면':
-        i_count = 8
-    elif r_order_food == '부대찌개':
-        i_count = 9
-    elif r_order_food == '물냉면':
-        i_count = 10
-    elif r_order_food == '냉모밀':
-        i_count = 11
-    return i_count
+    count_sum = 0
+    for i in range(0, 12):
+        if r_order_food == Sanyung_Menu[i]:
+            s_count = count_sum
+        count_sum += 1
+
+    return s_count
 
 
 def tip_list_insert_count(r_order_food):
-    if r_order_food == '야끼우동':
-        i_count = 0
-    elif r_order_food == '짜그리':
-        i_count = 1
-    elif r_order_food == '치즈돈까스':
-        i_count = 2
-    elif r_order_food == '냉모밀':
-        i_count = 3
-    elif r_order_food == '부타동':
-        i_count = 4
-    elif r_order_food == '라면':
-        i_count = 5
-    elif r_order_food == '마불덮밥':
-        i_count = 6
-    elif r_order_food == '컵닭강정':
-        i_count = 7
-    elif r_order_food == '김치찌개':
-        i_count = 8
-    elif r_order_food == '돈까스김치나베':
-        i_count = 9
-    elif r_order_food == '모듬컵밥':
-        i_count = 10
-    elif r_order_food == '꼬치어묵우동':
-        i_count = 11
-    return i_count
+    count_sum = 0
+    for i in range(0, 12):
+        if r_order_food == TIP_Menu[i]:
+            t_count = count_sum
+        count_sum += 1
 
+    return t_count
+
+    """
+    if r_order_food == 'TIP_Menu[0]':
+        t_count = 0
+    elif r_order_food == TIP_Menu[1]:
+        t_count = 1
+    elif r_order_food == '치즈돈까스':
+        t_count = 2
+    elif r_order_food == '냉모밀':
+        t_count = 3
+    elif r_order_food == '부타동':
+        t_count = 4
+    elif r_order_food == '라면':
+        t_count = 5
+    elif r_order_food == '마불덮밥':
+        t_count = 6
+    elif r_order_food == '컵닭강정':
+        t_count = 7
+    elif r_order_food == '김치찌개':
+        t_count = 8
+    elif r_order_food == '돈까스김치나베':
+        t_count = 9
+    elif r_order_food == '모듬컵밥':
+        t_count = 10
+    elif r_order_food == '꼬치어묵우동':
+        t_count = 11
+    else:
+        t_count = 11
+    """
 
 class Calculate(Suite):
     cal = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16']
@@ -259,6 +242,9 @@ def bayes_inner_fnc(res_name):
     elif res_name == 'TIP':
         r_snapshot = TIP_real_time_track.get()
 
+    load_Menu(res_name)
+
+
     if r_snapshot is None:
         print('대기중 메뉴 없음')
         db.reference('Waiting_time_DB/%s/Waiting_time' % res_name).set(str(0))
@@ -359,16 +345,16 @@ def delete_inner_fnc(res_name):
 
                 if res_name == 'JongHap':
                     count = jonghap_list_insert_count(r_order_food)
-                    bayes_instance.mixes1[di[count]]['p%d' % (count + 1)] += 1
+                    bayes_instance.mixes1['%d' % di[count]]['p%d' % (count + 1)] += 1
                 elif res_name == 'Olive':
                     count = olive_list_insert_count(r_order_food)
-                    bayes_instance.mixes2[di[count]]['p%d' % (count + 1)] += 1
+                    bayes_instance.mixes2['%d' % di[count]]['p%d' % (count + 1)] += 1
                 elif res_name == 'Sanyung':
                     count = sanyung_list_insert_count(r_order_food)
-                    bayes_instance.mixes3[di[count]]['p%d' % (count + 1)] += 1
+                    bayes_instance.mixes3['%d' % di[count]]['p%d' % (count + 1)] += 1
                 elif res_name == 'TIP':
                     count = tip_list_insert_count(r_order_food)
-                    bayes_instance.mixes4[di[count]]['p%d' % (count + 1)] += 1
+                    bayes_instance.mixes4['%d' % di[count]]['p%d' % (count + 1)] += 1
 
 
 def bayes_thrd(i_cond, i_turn):
@@ -384,6 +370,7 @@ def bayes_thrd(i_cond, i_turn):
 
         i_turn.myTurn = 1
 
+
         i_cond.notifyAll()  # notify to all consumers
         i_cond.release()  # mutex_unlock
 
@@ -393,6 +380,9 @@ def delete_order(i_cond, i_turn):
 
     while True:
         finish_time = random.randint(3, 10)
+
+        sleep(10)
+
         i_cond.acquire()  # mutex_lock
 
         delete_inner_fnc('JongHap')
@@ -404,8 +394,6 @@ def delete_order(i_cond, i_turn):
 
         i_cond.notifyAll()  # notify to all consumers
         i_cond.release()  # mutex_unlock
-
-        sleep(10)
 
 
 hypos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16']
