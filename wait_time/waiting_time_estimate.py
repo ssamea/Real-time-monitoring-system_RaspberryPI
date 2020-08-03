@@ -32,11 +32,11 @@ Sanyung_Menu = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 TIP_Menu = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
-def load_Menu(restaurant):
+def load_menu(restaurant):
     global JongHap_Menu
     global Olive_Menu
     global Sanyung_Menu
-    global  TIP_Menu
+    global TIP_Menu
 
     l_snapshot = Menu_track.child(restaurant + '/').get()
     count_sum = 0
@@ -55,6 +55,7 @@ def load_Menu(restaurant):
 
 def jonghap_list_insert_count(r_order_food):
     count_sum = 0
+    j_count = 0
     for i in range(0, 12):
         if r_order_food == JongHap_Menu[i]:
             j_count = count_sum
@@ -65,6 +66,7 @@ def jonghap_list_insert_count(r_order_food):
 
 def olive_list_insert_count(r_order_food):
     count_sum = 0
+    o_count = 0
     for i in range(0, 12):
         if r_order_food == Olive_Menu[i]:
             o_count = count_sum
@@ -75,6 +77,7 @@ def olive_list_insert_count(r_order_food):
 
 def sanyung_list_insert_count(r_order_food):
     count_sum = 0
+    s_count = 0
     for i in range(0, 12):
         if r_order_food == Sanyung_Menu[i]:
             s_count = count_sum
@@ -85,6 +88,7 @@ def sanyung_list_insert_count(r_order_food):
 
 def tip_list_insert_count(r_order_food):
     count_sum = 0
+    t_count = 0
     for i in range(0, 12):
         if r_order_food == TIP_Menu[i]:
             t_count = count_sum
@@ -92,7 +96,8 @@ def tip_list_insert_count(r_order_food):
 
     return t_count
 
-    """
+
+"""
     if r_order_food == 'TIP_Menu[0]':
         t_count = 0
     elif r_order_food == TIP_Menu[1]:
@@ -119,7 +124,8 @@ def tip_list_insert_count(r_order_food):
         t_count = 11
     else:
         t_count = 11
-    """
+"""
+
 
 class Calculate(Suite):
     cal = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16']
@@ -242,7 +248,7 @@ def bayes_inner_fnc(res_name):
     elif res_name == 'TIP':
         r_snapshot = TIP_real_time_track.get()
 
-    load_Menu(res_name)
+    load_menu(res_name)
 
 
     if r_snapshot is None:
@@ -306,7 +312,13 @@ def bayes_inner_fnc(res_name):
                     max_num = prob
                     end_hypo = hypo
 
-            cnt += int(end_hypo)
+            if cnt == 0:
+                cnt += int(end_hypo)
+            elif int(end_hypo) > 3:
+                cnt += int(end_hypo) - 3  # 동시에 조리를 할 경우를 상정하여 조금씩 대기시간 차감
+            else:
+                cnt += int(end_hypo) - 1
+
             print(end_hypo, max_num)
 
             print('================================================')
