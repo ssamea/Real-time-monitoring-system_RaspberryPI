@@ -150,7 +150,7 @@ if __name__ == '__main__':
     turn = CondVar()
     ref1 = db.reference('Distribution_DB/JongHap')
     ref2 = db.reference('Distribution_DB/Sanyung')
-    ref3 = db.reference('Distribution_DB/Tip')
+    ref3 = db.reference('Distribution_DB/TIP')
     ref4 = db.reference('Distribution_DB/Olive')
 
     for i in range(1):
