@@ -97,36 +97,6 @@ def tip_list_insert_count(r_order_food):
     return t_count
 
 
-"""
-    if r_order_food == 'TIP_Menu[0]':
-        t_count = 0
-    elif r_order_food == TIP_Menu[1]:
-        t_count = 1
-    elif r_order_food == '치즈돈까스':
-        t_count = 2
-    elif r_order_food == '냉모밀':
-        t_count = 3
-    elif r_order_food == '부타동':
-        t_count = 4
-    elif r_order_food == '라면':
-        t_count = 5
-    elif r_order_food == '마불덮밥':
-        t_count = 6
-    elif r_order_food == '컵닭강정':
-        t_count = 7
-    elif r_order_food == '김치찌개':
-        t_count = 8
-    elif r_order_food == '돈까스김치나베':
-        t_count = 9
-    elif r_order_food == '모듬컵밥':
-        t_count = 10
-    elif r_order_food == '꼬치어묵우동':
-        t_count = 11
-    else:
-        t_count = 11
-"""
-
-
 class Calculate(Suite):
     cal = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16']
 
