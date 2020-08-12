@@ -203,7 +203,7 @@ class CondVar:
 
 def bayes_inner_fnc(res_name):
     global di
-    global PAST_finish_time  # 이전 조리 완료 시간 ( ti-1 )
+    global PAST_finish_time  # 이전 조리완료 시간 ( ti-1 )
     global count
     global cnt
     global sample_num
