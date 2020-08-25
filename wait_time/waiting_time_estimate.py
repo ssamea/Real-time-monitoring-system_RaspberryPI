@@ -203,7 +203,7 @@ class CondVar:
 
 def bayes_inner_fnc(res_name):
     global di
-    global PAST_finish_time  # 이전 조리완료 시간 ( ti-1 )
+    global PAST_finish_time  # 이전 조리 완료 시간 ( ti-1 )
     global count
     global cnt
     global sample_num
@@ -324,6 +324,7 @@ def delete_inner_fnc(res_name):
 
                 r_order_food = db.reference('Restaurant_DB/Real_time/%s/%s/order_food' % (res_name, R_key)).get()
                 bayes_instance = Calculate()
+                print(count)
 
                 if res_name == 'JongHap':
                     count = jonghap_list_insert_count(r_order_food)
