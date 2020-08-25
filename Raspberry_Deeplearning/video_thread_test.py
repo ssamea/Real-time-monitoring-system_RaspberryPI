@@ -52,16 +52,15 @@ def recordVideo():
         camera.stop_preview()
 
 def record(cond,turn):
-    while True:
-        cond.acquire()  ### mutex_lock
-        while turn.myTurn != 0: cond.wait()
-        print('record run')
-        recordVideo()
-        turn.myTurn = 1
+    cond.acquire()  ### mutex_lock
+    while turn.myTurn != 0: cond.wait()
+    print('record run')
+    recordVideo()
+    turn.myTurn = 1
 
-        cond.notifyAll()  # notify to all consumers
-        cond.release() ### mutex_unlock
-        print('record end')
+    cond.notifyAll()  # notify to all consumers
+    cond.release() ### mutex_unlock
+    print('record end')
 
 
 def deeplearning(cond,turn):
@@ -153,7 +152,7 @@ if __name__ == '__main__':
     ref3 = db.reference('Distribution_DB/TIP')
     ref4 = db.reference('Distribution_DB/Olive')
 
-    for i in range(1):
+    whlie True:
         t1 = threading.Thread(target=record, args=(cond,turn))
         t2 = threading.Thread(target=deeplearning, args=(cond,turn))
         t1.start()
