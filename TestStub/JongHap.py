@@ -15,6 +15,7 @@ firebase_admin.initialize_app(cred, {
     'storageBucket': 'graduate-work-462b3.appspot.com'
 })
 
+
 bucket= storage.bucket()
 #blob=bucket.blob("food_img/JongHap/1.jpg")
 #image=blob.download_as_string("1")
