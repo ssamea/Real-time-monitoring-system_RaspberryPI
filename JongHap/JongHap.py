@@ -10,7 +10,7 @@ from firebase_admin import credentials
 from google.cloud import storage
 import pyrebase
 
-#인증
+#인증(구글파이어베이스)
 cred = credentials.Certificate('myKey.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://graduate-work-462b3.firebaseio.com/'
