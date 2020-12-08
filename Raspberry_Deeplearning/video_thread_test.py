@@ -26,6 +26,7 @@ firebase_admin.initialize_app(cred, {
 
 bucket = storage.bucket()
 
+#파일업로드
 def fileUpload(file):
     blob = bucket.blob(file)
     #new token and metadata 설정
