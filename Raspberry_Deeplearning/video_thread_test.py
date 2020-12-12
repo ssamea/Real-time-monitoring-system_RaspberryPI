@@ -40,7 +40,7 @@ def fileUpload(file):
     print(blob.public_url)
 
 
-
+#
 def recordVideo():
     with picamera.PiCamera() as camera:
         camera.resolution = (320, 240)
