@@ -5,3 +5,7 @@
 2. 라즈베리파이 파이카메라(영상촬영& 딥러닝)<br>
 3. 어드민 웹 어플리케이션(node.js)<br>
 
+
+#Demo
+
+<img src="https://user-images.githubusercontent.com/49589578/107207746-06d6e880-6a44-11eb-9144-86431a629c6e.png" alt="뿅" width="700" height="370">
