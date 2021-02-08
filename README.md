@@ -8,4 +8,4 @@
 
 #Demo
 
-<img src="https://user-images.githubusercontent.com/49589578/107207746-06d6e880-6a44-11eb-9144-86431a629c6e.png" alt="뿅" width="700" height="370">
+<img src="https://user-images.githubusercontent.com/49589578/107207746-06d6e880-6a44-11eb-9144-86431a629c6e.png" >
