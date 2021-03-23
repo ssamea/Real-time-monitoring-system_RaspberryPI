@@ -1,3 +1,5 @@
+### SW 구성도
+![구성도](https://user-images.githubusercontent.com/49589578/112089590-4d883880-8bd5-11eb-92e4-ec338f59449f.png)
 
 ### KPU_graduationWork
 산기대 졸업작품 관련 리포지터리
