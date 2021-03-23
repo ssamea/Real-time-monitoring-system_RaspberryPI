@@ -8,8 +8,9 @@
 ![구성도](https://user-images.githubusercontent.com/49589578/112089590-4d883880-8bd5-11eb-92e4-ec338f59449f.png)
 
 ### 2. ADMIN WEB APPLICATION
-<img src="https://user-images.githubusercontent.com/49589578/107207746-06d6e880-6a44-11eb-9144-86431a629c6e.png" width="400" height="400 ">
-<img src="https://user-images.githubusercontent.com/49589578/107207759-0b9b9c80-6a44-11eb-963f-fc4907fc9a7c.png" width="400" height="400">
+#### 2-1) 인원 현황 모니터링 기능
+<img src="https://user-images.githubusercontent.com/49589578/107207746-06d6e880-6a44-11eb-9144-86431a629c6e.png">
+<img src="https://user-images.githubusercontent.com/49589578/107207759-0b9b9c80-6a44-11eb-963f-fc4907fc9a7c.png">
 
 ### 3. Client RASPBERRY PI - TOUCH SCREEN
 ![터치스크린](https://user-images.githubusercontent.com/49589578/112089792-aa83ee80-8bd5-11eb-9e2e-43d62ce85f2f.png)
