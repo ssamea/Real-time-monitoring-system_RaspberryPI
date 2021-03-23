@@ -9,7 +9,7 @@
 
 ### 2. ADMIN WEB APPLICATION
 #### 2-1) 인원 현황 모니터링 기능
-<img src="https://user-images.githubusercontent.com/49589578/107207746-06d6e880-6a44-11eb-9144-86431a629c6e.png">
+![DeepLearning](https://user-images.githubusercontent.com/49589578/107207746-06d6e880-6a44-11eb-9144-86431a629c6e.png)
 ![인원파악](https://user-images.githubusercontent.com/49589578/112090132-5299b780-8bd6-11eb-8f3b-b729b9ebf62e.png)
 
 ### 3. Client RASPBERRY PI - TOUCH SCREEN
